@@ -31,22 +31,25 @@
             overflow: hidden;
         }
 
-        /* Минималистичный чёрный фон с тонкими акцентами */
+        /* Фон с вашим изображением */
         .background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(ellipse at 20% 80%, rgba(30, 30, 40, 0.4) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(25, 25, 35, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(15, 15, 20, 0.5) 0%, transparent 70%),
-                linear-gradient(180deg, #0a0a0a 0%, #0f0f12 50%, #0a0a0a 100%);
+            background-image: url('photo_2025-12-28_10-03-59.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             z-index: 1;
+            /* Затемнение изображения для лучшей читаемости контента */
+            background-color: rgba(0, 0, 0, 0.3);
+            background-blend-mode: overlay;
         }
 
-        /* Тонкие декоративные линии */
+        /* Затемнение для улучшения контраста */
         .background::before {
             content: '';
             position: absolute;
@@ -54,221 +57,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                linear-gradient(90deg, transparent 49.5%, rgba(255,255,255,0.02) 50%, transparent 50.5%),
-                linear-gradient(0deg, transparent 49.5%, rgba(255,255,255,0.02) 50%, transparent 50.5%);
-            background-size: 80px 80px;
-            opacity: 0.5;
+            background: linear-gradient(180deg, 
+                rgba(0, 0, 0, 0.4) 0%, 
+                rgba(0, 0, 0, 0.6) 50%, 
+                rgba(0, 0, 0, 0.4) 100%);
+            z-index: 1;
         }
 
-        /* Мягкое свечение по краям */
-        .background::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(0,0,0,0.8) 70%);
-            pointer-events: none;
-        }
-
-        /* Добавьте этот код в существующий стиль после .background::after */
-
-/* Мерцающие звёзды на фоне */
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.star {
-    position: absolute;
-    background-color: white;
-    border-radius: 50%;
-    animation: twinkle 3s infinite alternate;
-}
-
-@keyframes twinkle {
-    0%, 100% { opacity: 0.2; }
-    50% { opacity: 0.8; }
-}
-
-/* Тонкие светящиеся линии по краям */
-.edge-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2;
-    overflow: hidden;
-}
-
-.edge-glow::before,
-.edge-glow::after {
-    content: '';
-    position: absolute;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
-}
-
-.edge-glow::before {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    animation: edgeMove 8s linear infinite;
-}
-
-.edge-glow::after {
-    top: 0;
-    right: 0;
-    width: 1px;
-    height: 100%;
-    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.03), transparent);
-    animation: edgeMoveVertical 10s linear infinite;
-}
-
-@keyframes edgeMove {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-@keyframes edgeMoveVertical {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-}
-
-/* Снежные сугробы внизу */
-.snow-drifts {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 80px;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.snow-drift {
-    position: absolute;
-    bottom: 0;
-    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.05));
-    border-radius: 50% 50% 0 0;
-    animation: driftFloat 6s ease-in-out infinite alternate;
-}
-
-.snow-drift:nth-child(1) {
-    left: 10%;
-    width: 200px;
-    height: 40px;
-    animation-delay: 0s;
-}
-
-.snow-drift:nth-child(2) {
-    left: 40%;
-    width: 300px;
-    height: 60px;
-    animation-delay: 1s;
-}
-
-.snow-drift:nth-child(3) {
-    right: 15%;
-    width: 250px;
-    height: 50px;
-    animation-delay: 2s;
-}
-
-@keyframes driftFloat {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-5px); }
-}
-
-/* Парящие блестящие частицы вокруг контента */
-.sparkles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2;
-}
-
-.sparkle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    filter: blur(0.5px);
-    box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.5);
-    animation: sparkleFloat 10s infinite linear;
-}
-
-@keyframes sparkleFloat {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-100px) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* Улучшенное свечение вокруг контента */
-.content::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.03) 0%,
-        rgba(255, 255, 255, 0.01) 50%,
-        rgba(255, 255, 255, 0.03) 100%);
-    border-radius: 27px;
-    z-index: -1;
-    filter: blur(15px);
-    opacity: 0.5;
-}
-
-/* Добавьте этот код в существующий .content */
-.content {
-    /* Обновите существующие свойства: */
-    box-shadow: 
-        0 25px 60px rgba(0, 0, 0, 0.8),
-        0 0 0 1px rgba(255, 255, 255, 0.1),
-        0 0 60px rgba(255, 255, 255, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.5);
-}
-
-/* Улучшенный фон */
-.background {
-    /* Обновите градиенты: */
-    background: 
-        radial-gradient(ellipse at 20% 80%, rgba(40, 40, 60, 0.5) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(35, 35, 55, 0.4) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(25, 25, 35, 0.6) 0%, transparent 70%),
-        linear-gradient(180deg, #0a0a0a 0%, #0f0f15 30%, #0a0a0d 100%);
-}
-
-        /* Снежинки */
-        .snowflakes {
+        /* Мерцающие звёзды на фоне */
+        .stars {
             position: absolute;
             top: 0;
             left: 0;
@@ -278,6 +75,159 @@
             z-index: 2;
         }
 
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Тонкие светящиеся линии по краям */
+        .edge-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+            overflow: hidden;
+        }
+
+        .edge-glow::before,
+        .edge-glow::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+        }
+
+        .edge-glow::before {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            animation: edgeMove 8s linear infinite;
+        }
+
+        .edge-glow::after {
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            animation: edgeMoveVertical 10s linear infinite;
+        }
+
+        @keyframes edgeMove {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes edgeMoveVertical {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Снежные сугробы внизу */
+        .snow-drifts {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .snow-drift {
+            position: absolute;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.1));
+            border-radius: 50% 50% 0 0;
+            animation: driftFloat 6s ease-in-out infinite alternate;
+        }
+
+        .snow-drift:nth-child(1) {
+            left: 10%;
+            width: 200px;
+            height: 40px;
+            animation-delay: 0s;
+        }
+
+        .snow-drift:nth-child(2) {
+            left: 40%;
+            width: 300px;
+            height: 60px;
+            animation-delay: 1s;
+        }
+
+        .snow-drift:nth-child(3) {
+            right: 15%;
+            width: 250px;
+            height: 50px;
+            animation-delay: 2s;
+        }
+
+        @keyframes driftFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-5px); }
+        }
+
+        /* Парящие блестящие частицы вокруг контента */
+        .sparkles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            filter: blur(0.5px);
+            box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.5);
+            animation: sparkleFloat 10s infinite linear;
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Снежинки */
+        .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+        }
+
         .snowflake {
             position: absolute;
             background-color: rgba(255, 255, 255, 0.8);
@@ -285,23 +235,21 @@
             box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
         }
 
-        /* Основное содержимое */
+        /* Основное содержимое - БЕЗ ФОНА И РАМКИ */
         .content {
             position: relative;
-            z-index: 3;
+            z-index: 4;
             width: 90%;
-            max-width: 900px;
+            max-width: 1000px; /* Увеличено для больших подарков */
             text-align: center;
             color: white;
-            background: linear-gradient(135deg, rgba(20, 20, 25, 0.9) 0%, rgba(15, 15, 18, 0.95) 100%);
+            /* Убираем все фоны, тени и рамки */
+            background: transparent;
             padding: 30px 25px;
-            border-radius: 25px;
-            box-shadow: 
-                0 25px 60px rgba(0, 0, 0, 0.6),
-                0 0 0 1px rgba(255, 255, 255, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 0;
+            box-shadow: none;
+            backdrop-filter: none;
+            border: none;
             min-height: 500px;
             display: flex;
             flex-direction: column;
@@ -309,30 +257,36 @@
             align-items: center;
         }
 
+        /* Убираем свечение вокруг контента */
+        .content::before {
+            display: none;
+        }
+
         header {
             margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: none; /* Убираем линию под заголовком */
             width: 100%;
         }
 
         h1 {
             font-size: 2.8rem;
             margin-bottom: 15px;
-            background: linear-gradient(90deg, #e8e8e8 0%, #ffffff 50%, #b8b8b8 100%);
+            background: linear-gradient(90deg, #ffffff 0%, #f0f0f0 50%, #e0e0e0 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.7); /* Усиливаем тень для лучшей читаемости */
         }
 
         .subtitle {
             font-size: 1.3rem;
             font-family: 'Roboto', sans-serif;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.9); /* Делаем текст ярче */
             font-weight: 300;
             letter-spacing: 0.5px;
             transition: all 0.8s ease;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7); /* Добавляем тень для лучшей читаемости */
         }
 
         .subtitle.hidden {
@@ -377,34 +331,28 @@
             display: none;
         }
 
+        /* УВЕЛИЧЕННАЯ ЁЛОЧКА БЕЗ РАМКИ И ТЕНИ */
         .tree-gif {
-            width: 250px;
-            height: 250px;
-            border-radius: 20px;
-            box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.8),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                0 0 40px rgba(255, 255, 255, 0.05);
-            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6));
-            background: rgba(0, 0, 0, 0.3);
-            object-fit: cover;
+            width: 320px; /* Увеличено с 250px */
+            height: 320px; /* Увеличено с 250px */
+            border-radius: 0; /* Убираем скругления */
+            box-shadow: none; /* Убираем все тени */
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2)); /* Оставляем только очень лёгкую тень */
+            background: transparent; /* Убираем фон */
+            object-fit: contain; /* Сохраняем пропорции */
+            border: none; /* Убираем рамку */
         }
 
         .emoji-fallback {
-            font-size: 180px;
-            line-height: 250px;
+            font-size: 230px; /* Увеличено пропорционально */
+            line-height: 320px; /* Увеличено пропорционально */
             text-align: center;
-            filter: drop-shadow(0 10px 30px rgba(0, 255, 100, 0.3));
+            filter: drop-shadow(0 5px 15px rgba(0, 255, 100, 0.2)); /* Уменьшаем тень */
         }
 
+        /* УБИРАЕМ БЕЛУЮ ТЕНЬ ПОД ЁЛКОЙ */
         .gif-shadow {
-            width: 200px;
-            height: 30px;
-            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            margin: 10px auto 0;
-            filter: blur(8px);
-            transition: all 0.8s ease;
+            display: none; /* Полностью убираем тень */
         }
 
         .gif-wrapper.hiding .gif-shadow {
@@ -423,47 +371,51 @@
             75% { transform: rotate(-1deg) scale(1.03); }
         }
 
-        /* Подарки */
+        /* Подарки - ЕЩЁ БОЛЬШЕ И ВЫШЕ */
         .gifts-container {
             display: flex;
+            flex-direction: row; /* Явно указываем горизонтальное расположение */
             justify-content: center;
             align-items: center;
-            gap: 40px;
+            gap: 60px; /* Увеличено расстояние между подарками */
             opacity: 0;
             transform: translateY(50px) scale(0.8);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
             position: absolute;
-            top: 50%;
+            top: 40%; /* ПОДНЯТО ЕЩЁ ВЫШЕ (было 45%) */
             left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
+            transform: translate(-50%, -40%) scale(0.8);
+            width: auto; /* Автоматическая ширина */
+            white-space: nowrap; /* Запрещаем перенос строк */
         }
 
         .gifts-container.visible {
             opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
+            transform: translate(-50%, -40%) scale(1); /* Обновлено для новой позиции */
             pointer-events: all;
         }
 
         .gift {
-            width: 140px;
-            height: 160px;
+            width: 190px; /* Увеличено ещё больше */
+            height: 210px; /* Увеличено ещё больше */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-            border-radius: 20px;
-            padding: 15px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border-radius: 25px; /* Немного увеличили скругление */
+            padding: 25px; /* Увеличили отступы */
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 
-                0 15px 40px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                0 25px 60px rgba(0, 0, 0, 0.7),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
             overflow: hidden;
             animation: floatGift 3s ease-in-out infinite;
+            flex-shrink: 0; /* Запрещаем сжатие */
         }
 
         .gift:nth-child(1) { animation-delay: 0s; }
@@ -472,59 +424,63 @@
 
         @keyframes floatGift {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
         }
 
         .gift:hover {
-            transform: translateY(-15px) scale(1.1);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
-            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-20px) scale(1.15); /* Увеличили эффект при наведении */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%);
+            border-color: rgba(255, 255, 255, 0.4);
             box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.6),
-                0 0 30px rgba(255, 255, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                0 35px 70px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
             animation-play-state: paused;
         }
 
         .gift-gif {
-            width: 90px;
-            height: 90px;
+            width: 130px; /* Увеличено ещё больше */
+            height: 130px; /* Увеличено ещё больше */
             object-fit: contain;
-            margin-bottom: 10px;
-            border-radius: 12px;
-            background: rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px; /* Увеличили отступ */
+            border-radius: 15px; /* Увеличили скругление */
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .gift-emoji {
-            font-size: 4.5rem;
-            margin-bottom: 10px;
+            font-size: 6rem; /* Увеличено ещё больше */
+            margin-bottom: 15px; /* Увеличили отступ */
             filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
             text-align: center;
-            line-height: 90px;
+            line-height: 130px; /* Подогнали под высоту gift-gif */
         }
 
         .gift-name {
-            font-size: 1.1rem;
+            font-size: 1.4rem; /* Увеличено ещё больше */
             font-weight: 600;
-            background: linear-gradient(90deg, #e0e0e0 0%, #ffffff 50%, #c0c0c0 100%);
+            background: linear-gradient(90deg, #f0f0f0 0%, #ffffff 50%, #d0d0d0 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-align: center;
         }
 
-        /* Заголовок "Выберите подарок" */
+        /* Заголовок "Выберите подарок" - ЕЩЁ ВЫШЕ */
         .choose-title {
             position: absolute;
-            top: 20px;
+            top: -100px; /* ЕЩЁ ВЫШЕ (было -80px) */
             left: 50%;
             transform: translateX(-50%);
-            font-size: 1.8rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+            font-size: 2.4rem; /* Увеличили размер ещё больше */
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 
+                0 4px 25px rgba(0, 0, 0, 0.9),
+                0 0 35px rgba(255, 215, 0, 0.5); /* Усилили золотистое свечение */
             opacity: 0;
             transition: all 0.8s ease;
             white-space: nowrap;
+            font-weight: 700; /* Сделали жирнее */
+            letter-spacing: 1.5px;
         }
 
         .choose-title.visible {
@@ -560,7 +516,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
             border-radius: 25px;
         }
@@ -571,7 +527,7 @@
             width: 90%;
             max-width: 500px;
             padding: 40px;
-            background: linear-gradient(135deg, #1a1a1f 0%, #0f0f12 100%);
+            background: linear-gradient(135deg, rgba(25, 25, 30, 0.95) 0%, rgba(20, 20, 25, 0.98) 100%);
             border-radius: 25px;
             box-shadow: 
                 0 30px 60px rgba(0, 0, 0, 0.9),
@@ -613,6 +569,32 @@
             100% { transform: translateX(100%); }
         }
 
+        /* GIF выбранного подарка в уведомлении */
+        .message-gif-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .message-gif {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .message-emoji {
+            font-size: 5rem;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
+            text-align: center;
+            line-height: 120px;
+        }
+
         .message-title {
             font-size: 2.2rem;
             margin-bottom: 20px;
@@ -627,7 +609,7 @@
         .message-text {
             font-size: 1.4rem;
             line-height: 1.6;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 20px;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
@@ -676,29 +658,117 @@
             border-color: rgba(255, 255, 255, 0.25);
         }
 
-        /* Конфетти */
-        .confetti {
+        /* УЛУЧШЕННОЕ КОНФЕТТИ */
+        .confetti-container {
             position: absolute;
-            width: 12px;
-            height: 12px;
-            opacity: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            border-radius: 2px;
             z-index: 999;
+            overflow: hidden;
         }
 
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transform-origin: center bottom;
+        }
+
+        /* Разные формы конфетти */
+        .confetti.rect {
+            border-radius: 2px;
+        }
+
+        .confetti.circle {
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+        }
+
+        .confetti.star {
+            background: transparent;
+            width: 15px;
+            height: 15px;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        /* Более реалистичные цвета */
+        .confetti.color1 { background-color: #FFD700; } /* Золотой */
+        .confetti.color2 { background-color: #C0C0C0; } /* Серебряный */
+        .confetti.color3 { background-color: #CD7F32; } /* Бронзовый */
+        .confetti.color4 { background-color: #FF6B6B; } /* Красный */
+        .confetti.color5 { background-color: #4ECDC4; } /* Бирюзовый */
+        .confetti.color6 { background-color: #FFD166; } /* Жёлтый */
+        .confetti.color7 { background-color: #06D6A0; } /* Зелёный */
+        .confetti.color8 { background-color: #118AB2; } /* Синий */
+        .confetti.color9 { background-color: #EF476F; } /* Розовый */
+        .confetti.color10 { background-color: #ffffff; } /* Белый */
+
+        /* Более реалистичная анимация конфетти */
         @keyframes confettiFall {
             0% {
-                transform: translateY(-100px) rotate(0deg);
+                transform: translateY(-100px) translateX(0) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
                 opacity: 1;
             }
             100% {
-                transform: translateY(100vh) rotate(720deg);
+                transform: translateY(100vh) translateX(calc(var(--drift-x) * 100px)) rotate(calc(var(--rotation) * 1deg)) scale(0.5);
                 opacity: 0;
             }
         }
 
+        @keyframes confettiSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Адаптивность */
+        @media (max-width: 1024px) {
+            .gifts-container {
+                gap: 40px; /* Уменьшено для ноутбуков */
+            }
+            
+            .gift {
+                width: 170px; /* Уменьшено для ноутбуков */
+                height: 190px; /* Уменьшено для ноутбуков */
+            }
+            
+            .gift-gif {
+                width: 110px; /* Уменьшено для ноутбуков */
+                height: 110px; /* Уменьшено для ноутбуков */
+            }
+            
+            .gift-emoji {
+                font-size: 5rem; /* Уменьшено для ноутбуков */
+                line-height: 110px; /* Уменьшено для ноутбуков */
+            }
+            
+            .choose-title {
+                top: -90px; /* Настроено для ноутбуков */
+                font-size: 2.1rem; /* Уменьшено для ноутбуков */
+            }
+            
+            .message-gif {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .message-emoji {
+                font-size: 4rem;
+                line-height: 100px;
+            }
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -709,45 +779,58 @@
             }
             
             .tree-gif {
-                width: 200px;
-                height: 200px;
+                width: 250px; /* Уменьшено для мобильных */
+                height: 250px; /* Уменьшено для мобильных */
             }
             
             .emoji-fallback {
-                font-size: 140px;
-                line-height: 200px;
+                font-size: 180px; /* Уменьшено для мобильных */
+                line-height: 250px; /* Уменьшено для мобильных */
             }
             
             .gifts-container {
-                gap: 20px;
+                gap: 25px; /* Уменьшено для мобильных */
+                flex-direction: row; /* Оставляем горизонтальное расположение */
+                top: 35%; /* Настроено для мобильных */
             }
             
             .gift {
-                width: 110px;
-                height: 130px;
+                width: 140px; /* Уменьшено для мобильных */
+                height: 160px; /* Уменьшено для мобильных */
             }
             
             .gift-gif {
-                width: 70px;
-                height: 70px;
+                width: 90px; /* Уменьшено для мобильных */
+                height: 90px; /* Уменьшено для мобильных */
             }
             
             .gift-emoji {
-                font-size: 3.5rem;
-                line-height: 70px;
+                font-size: 4rem; /* Уменьшено для мобильных */
+                line-height: 90px; /* Уменьшено для мобильных */
             }
             
             .gift-name {
-                font-size: 0.9rem;
+                font-size: 1.1rem; /* Уменьшено для мобильных */
             }
             
             .choose-title {
-                font-size: 1.4rem;
+                font-size: 1.7rem; /* Уменьшено для мобильных */
+                top: -70px; /* Настроено для мобильных */
             }
             
             .message {
                 padding: 30px 25px;
                 max-width: 400px;
+            }
+            
+            .message-gif {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .message-emoji {
+                font-size: 3.5rem;
+                line-height: 80px;
             }
             
             .message-title {
@@ -764,6 +847,48 @@
             }
         }
 
+        @media (max-width: 600px) {
+            .gifts-container {
+                gap: 15px; /* Ещё меньше для маленьких экранов */
+                top: 30%; /* Ещё выше для маленьких экранов */
+            }
+            
+            .gift {
+                width: 120px; /* Ещё меньше для маленьких экранов */
+                height: 140px; /* Ещё меньше для маленьких экранов */
+                padding: 15px;
+            }
+            
+            .gift-gif {
+                width: 80px; /* Ещё меньше для маленьких экранов */
+                height: 80px; /* Ещё меньше для маленьких экранов */
+            }
+            
+            .gift-emoji {
+                font-size: 3.5rem; /* Ещё меньше для маленьких экранов */
+                line-height: 80px; /* Ещё меньше для маленьких экранов */
+            }
+            
+            .gift-name {
+                font-size: 0.95rem; /* Ещё меньше для маленьких экранов */
+            }
+            
+            .choose-title {
+                font-size: 1.4rem; /* Ещё меньше для маленьких экранов */
+                top: -60px; /* Ещё выше для маленьких экранов */
+            }
+            
+            .message-gif {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .message-emoji {
+                font-size: 3rem;
+                line-height: 70px;
+            }
+        }
+
         @media (max-width: 480px) {
             .content {
                 padding: 20px 15px;
@@ -775,46 +900,57 @@
             }
             
             .tree-gif {
-                width: 160px;
-                height: 160px;
+                width: 200px; /* Уменьшено для маленьких экранов */
+                height: 200px; /* Уменьшено для маленьких экранов */
             }
             
             .emoji-fallback {
-                font-size: 120px;
-                line-height: 160px;
+                font-size: 150px; /* Уменьшено для маленьких экранов */
+                line-height: 200px; /* Уменьшено для маленьких экранов */
             }
             
             .gifts-container {
-                gap: 12px;
+                gap: 10px; /* Минимальный зазор для очень маленьких экранов */
+                top: 25%; /* Ещё выше для очень маленьких экранов */
             }
             
             .gift {
-                width: 90px;
-                height: 110px;
+                width: 110px; /* Минимальный размер для очень маленьких экранов */
+                height: 130px; /* Минимальный размер для очень маленьких экранов */
                 padding: 10px;
             }
 
             .gift-gif {
-                width: 55px;
-                height: 55px;
+                width: 70px; /* Минимальный размер для очень маленьких экранов */
+                height: 70px; /* Минимальный размер для очень маленьких экранов */
             }
 
             .gift-emoji {
-                font-size: 2.8rem;
-                line-height: 55px;
+                font-size: 3rem; /* Минимальный размер для очень маленьких экранов */
+                line-height: 70px; /* Минимальный размер для очень маленьких экранов */
             }
             
             .gift-name {
-                font-size: 0.75rem;
+                font-size: 0.85rem; /* Минимальный размер для очень маленьких экранов */
             }
             
             .choose-title {
-                font-size: 1.1rem;
-                top: 10px;
+                font-size: 1.2rem; /* Минимальный размер для очень маленьких экранов */
+                top: -50px; /* Минимальная высота для очень маленьких экранов */
             }
             
             .message {
                 padding: 25px 20px;
+            }
+            
+            .message-gif {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .message-emoji {
+                font-size: 2.5rem;
+                line-height: 60px;
             }
             
             .message-title {
@@ -842,13 +978,16 @@
 </head>
 <body>
     <div class="container">
-        <!-- Минималистичный чёрный фон -->
+        <!-- Фон с вашим изображением -->
         <div class="background"></div>
             
         <!-- Снежинки -->
         <div class="snowflakes" id="snowflakes"></div>
         
-        <!-- Основной контент -->
+        <!-- Контейнер для конфетти -->
+        <div class="confetti-container" id="confetti-container"></div>
+        
+        <!-- Основной контент - БЕЗ ФОНА И РАМКИ -->
         <div class="content">
             <header>
                 <h1><i class="fas fa-tree"></i> Новогодняя Ёлочка</h1>
@@ -859,7 +998,7 @@
                 <div class="gif-container">
                     <div class="gif-wrapper" id="tree-gif">
                         <img src="Animated_AgADTh0AAszIoUs.gif" alt="Новогодняя ёлочка" class="tree-gif">
-                        <div class="gif-shadow"></div>
+                        <!-- Тень убрана -->
                     </div>
                     
                     <p class="choose-title" id="choose-title">✨ Выберите подарок! ✨</p>
@@ -883,6 +1022,7 @@
             const giftsContainer = document.getElementById('gifts-container');
             const messageContainer = document.getElementById('message-container');
             const snowflakesContainer = document.getElementById('snowflakes');
+            const confettiContainer = document.getElementById('confetti-container');
             const subtitle = document.getElementById('subtitle');
             const chooseTitle = document.getElementById('choose-title');
             
@@ -1037,7 +1177,7 @@
                             // Добавляем небольшой эффект нажатия
                             giftElement.style.transform = 'translateY(-5px) scale(0.95)';
                             setTimeout(() => {
-                                giftElement.style.transform = 'translateY(-15px) scale(1.1)';
+                                giftElement.style.transform = 'translateY(-20px) scale(1.15)';
                             }, 150);
                         }
                     });
@@ -1051,7 +1191,7 @@
                 }, 50);
             }
             
-            // Показать выигрыш
+            // Показать выигрыш с GIF выбранного подарка
             function showPrize(giftIndex) {
                 const gift = gifts[giftIndex];
                 
@@ -1078,10 +1218,11 @@
                 const overlay = document.createElement('div');
                 overlay.className = 'message-overlay';
                 
-                // Создаем сообщение
+                // Создаем сообщение с GIF выбранного подарка
                 const messageElement = document.createElement('div');
                 messageElement.className = 'message';
                 
+                // HTML для сообщения с GIF подарка
                 messageElement.innerHTML = `
                     <button class="message-close">
                         <i class="fas fa-times"></i>
@@ -1090,6 +1231,10 @@
                         <i class="fas fa-gift" style="color: ${gift.color}"></i>
                         Поздравляем!
                     </h2>
+                    <div class="message-gif-container">
+                        <img src="${gift.gif}" alt="${gift.name} подарок" class="message-gif" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="message-emoji" style="display:none;">🎁</div>
+                    </div>
                     <p class="message-text">${gift.message}</p>
                     <div class="message-button">Подробнее</div>
                 `;
@@ -1112,8 +1257,8 @@
                 // Делаем контейнер сообщения видимым
                 messageContainer.classList.add('visible');
                 
-                // Создаем конфетти
-                createConfetti();
+                // Создаем реалистичное конфетти
+                createRealisticConfetti();
             }
             
             // Скрыть выигрыш
@@ -1127,31 +1272,61 @@
                 }, 500);
             }
             
-            // Создание конфетти (белые и серые тона для минимализма)
-            function createConfetti() {
-                const confettiCount = 80;
-                const colors = ['#ffffff', '#e0e0e0', '#c0c0c0', '#a0a0a0', '#808080'];
+            // Создание РЕАЛИСТИЧНОГО конфетти
+            function createRealisticConfetti() {
+                const confettiCount = 150;
+                const shapes = ['rect', 'circle', 'star'];
+                const colors = [
+                    'color1', 'color2', 'color3', 'color4', 'color5',
+                    'color6', 'color7', 'color8', 'color9', 'color10'
+                ];
                 
                 for (let i = 0; i < confettiCount; i++) {
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
                     
-                    // Случайные параметры
-                    const size = Math.random() * 8 + 4;
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    const left = Math.random() * 100;
-                    const duration = Math.random() * 2 + 2;
-                    const delay = Math.random() * 1;
+                    // Случайная форма
+                    const shape = shapes[Math.floor(Math.random() * shapes.length)];
+                    confetti.classList.add(shape);
                     
-                    // Установка стилей
-                    confetti.style.width = `${size}px`;
-                    confetti.style.height = `${size}px`;
-                    confetti.style.backgroundColor = color;
+                    // Случайный цвет
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.classList.add(color);
+                    
+                    // Случайные параметры
+                    const left = Math.random() * 100;
+                    const duration = Math.random() * 3 + 2;
+                    const delay = Math.random() * 1;
+                    const driftX = (Math.random() - 0.5) * 2;
+                    const rotation = Math.random() * 720;
+                    const startY = -20;
+                    
+                    // CSS переменные для анимации
+                    confetti.style.setProperty('--drift-x', driftX);
+                    confetti.style.setProperty('--rotation', rotation);
                     confetti.style.left = `${left}%`;
+                    confetti.style.top = `${startY}px`;
                     confetti.style.animation = `confettiFall ${duration}s ease-out ${delay}s forwards`;
                     
-                    // Добавляем в контейнер контента
-                    document.querySelector('.content').appendChild(confetti);
+                    // Добавляем вращение для звёзд и кругов
+                    if (shape === 'star' || shape === 'circle') {
+                        confetti.style.animation += `, confettiSpin ${duration * 0.5}s linear ${delay}s infinite`;
+                    }
+                    
+                    // Случайный размер для разнообразия
+                    if (shape === 'rect') {
+                        const width = Math.random() * 8 + 6;
+                        const height = Math.random() * 15 + 10;
+                        confetti.style.width = `${width}px`;
+                        confetti.style.height = `${height}px`;
+                    } else if (shape === 'circle') {
+                        const size = Math.random() * 10 + 6;
+                        confetti.style.width = `${size}px`;
+                        confetti.style.height = `${size}px`;
+                    }
+                    
+                    // Добавляем в контейнер конфетти
+                    confettiContainer.appendChild(confetti);
                     
                     // Удаляем после анимации
                     setTimeout(() => {
