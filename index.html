@@ -283,8 +283,13 @@
             letter-spacing: 0.5px;
         }
 
+        /* Увеличение иконки елки в заголовке */
+        h1 i.fas.fa-tree {
+            font-size: 2.9rem; /* Увеличено */
+        }
+
         .subtitle {
-            font-size: 1.3rem;
+            font-size: 1.5rem; /* Увеличено с 1.3rem */
             font-family: 'Codec Pro', sans-serif; /* Codec Pro для подзаголовка */
             color: rgba(255, 255, 255, 0.9); /* Делаем текст ярче */
             font-weight: 400; /* Regular weight для Codec Pro */
@@ -299,10 +304,10 @@
             pointer-events: none;
         }
 
-        /* Контейнер с гифкой */
+        /* Контейнер с гифкой - поднят вверх */
         .gif-container {
             position: relative;
-            margin: 30px 0;
+            margin: 30px 0 20px 0; /* Подъем вверх за счет уменьшения margin-bottom */
             padding: 20px;
             transition: margin-bottom 0.8s ease;
             display: flex;
@@ -345,6 +350,13 @@
             background: transparent; /* Убираем фон */
             object-fit: contain; /* Сохраняем пропорции */
             border: none; /* Убираем рамку */
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* Добавлен transition для плавного увеличения */
+        }
+
+        /* Увеличение гифки в два раза */
+        .gif-wrapper.enlarged .tree-gif {
+            width: 640px; /* Увеличено в 2 раза */
+            height: 640px; /* Увеличено в 2 раза */
         }
 
         .emoji-fallback {
@@ -352,6 +364,12 @@
             line-height: 320px; /* Увеличено пропорционально */
             text-align: center;
             filter: drop-shadow(0 5px 15px rgba(0, 255, 100, 0.2)); /* Уменьшаем тень */
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* Добавлен transition */
+        }
+
+        .gif-wrapper.enlarged .emoji-fallback {
+            font-size: 460px; /* Увеличено в 2 раза */
+            line-height: 640px; /* Увеличено в 2 раза */
         }
 
         /* УБИРАЕМ БЕЛУЮ ТЕНЬ ПОД ЁЛКОЙ */
@@ -471,13 +489,13 @@
             letter-spacing: 0.3px;
         }
 
-        /* Заголовок "Выберите подарок" - ЕЩЁ ВЫШЕ */
+        /* Заголовок "Выберите подарок" - ЕЩЁ ВЫШЕ И УВЕЛИЧЕН */
         .choose-title {
             position: absolute;
-            top: -100px; /* ЕЩЁ ВЫШЕ (было -80px) */
+            top: -120px; /* ЕЩЁ ВЫШЕ (было -100px) */
             left: 50%;
             transform: translateX(-50%);
-            font-size: 2.4rem; /* Увеличили размер ещё больше */
+            font-size: 2.6rem; /* Увеличили размер ещё больше */
             color: rgba(255, 255, 255, 0.95);
             text-shadow: 
                 0 4px 25px rgba(0, 0, 0, 0.9),
@@ -494,7 +512,7 @@
             opacity: 1;
         }
 
-        /* СООБЩЕНИЕ О ВЫИГРЫШЕ */
+        /* СООБЩЕНИЕ О ВЫИГРЫШЕ - УВЕЛИЧЕНО */
         .message-container {
             position: absolute;
             top: 0;
@@ -532,8 +550,8 @@
             position: relative;
             z-index: 1001;
             width: 90%;
-            max-width: 500px;
-            padding: 40px;
+            max-width: 600px; /* Увеличено с 500px */
+            padding: 50px 45px; /* Увеличено с 40px */
             background: linear-gradient(135deg, rgba(25, 25, 30, 0.95) 0%, rgba(20, 20, 25, 0.98) 100%);
             border-radius: 25px;
             box-shadow: 
@@ -576,7 +594,7 @@
             100% { transform: translateX(100%); }
         }
 
-        /* GIF выбранного подарка в уведомлении */
+        /* GIF выбранного подарка в уведомлении - УВЕЛИЧЕНО */
         .message-gif-container {
             margin: 20px 0;
             display: flex;
@@ -585,8 +603,8 @@
         }
 
         .message-gif {
-            width: 120px;
-            height: 120px;
+            width: 140px; /* Увеличено с 120px */
+            height: 140px; /* Увеличено с 120px */
             object-fit: contain;
             border-radius: 15px;
             background: rgba(0, 0, 0, 0.3);
@@ -596,14 +614,14 @@
         }
 
         .message-emoji {
-            font-size: 5rem;
+            font-size: 6rem; /* Увеличено с 5rem */
             filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
             text-align: center;
-            line-height: 120px;
+            line-height: 140px; /* Увеличено с 120px */
         }
 
         .message-title {
-            font-size: 2.2rem;
+            font-size: 2.6rem; /* Увеличено с 2.2rem */
             margin-bottom: 20px;
             color: #ffffff;
             display: flex;
@@ -617,7 +635,7 @@
         }
 
         .message-text {
-            font-size: 1.4rem;
+            font-size: 1.6rem; /* Увеличено с 1.4rem */
             line-height: 1.6;
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 20px;
@@ -629,12 +647,12 @@
 
         .message-button {
             display: inline-block;
-            padding: 14px 40px;
+            padding: 16px 45px; /* Увеличено с 14px 40px */
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             color: #ffffff;
-            font-size: 1.1rem;
+            font-size: 1.3rem; /* Увеличено с 1.1rem */
             font-weight: 500; /* Medium weight для Codec Pro */
             font-family: 'Codec Pro', sans-serif; /* Codec Pro для кнопки */
             letter-spacing: 0.5px;
@@ -752,6 +770,10 @@
                 font-size: 2.4rem;
             }
             
+            h1 i.fas.fa-tree {
+                font-size: 2.5rem; /* Увеличено адаптивно */
+            }
+            
             .gifts-container {
                 gap: 40px; /* Уменьшено для ноутбуков */
             }
@@ -776,26 +798,31 @@
             }
             
             .choose-title {
-                top: -90px; /* Настроено для ноутбуков */
-                font-size: 2rem; /* Уменьшено для ноутбуков */
+                top: -100px; /* Настроено для ноутбуков */
+                font-size: 2.2rem; /* Уменьшено для ноутбуков */
             }
             
             .message-gif {
-                width: 100px;
-                height: 100px;
+                width: 120px; /* Увеличено адаптивно */
+                height: 120px; /* Увеличено адаптивно */
             }
             
             .message-emoji {
-                font-size: 4rem;
-                line-height: 100px;
+                font-size: 5rem; /* Увеличено адаптивно */
+                line-height: 120px; /* Увеличено адаптивно */
             }
             
             .message-title {
-                font-size: 2rem;
+                font-size: 2.2rem; /* Увеличено адаптивно */
             }
             
             .message-text {
-                font-size: 1.2rem;
+                font-size: 1.4rem; /* Увеличено адаптивно */
+            }
+            
+            .message-button {
+                padding: 14px 40px; /* Увеличено адаптивно */
+                font-size: 1.1rem; /* Увеличено адаптивно */
             }
         }
 
@@ -804,8 +831,12 @@
                 font-size: 2rem;
             }
             
+            h1 i.fas.fa-tree {
+                font-size: 2.2rem; /* Увеличено адаптивно */
+            }
+            
             .subtitle {
-                font-size: 1.1rem;
+                font-size: 1.3rem; /* Увеличено адаптивно */
             }
             
             .tree-gif {
@@ -813,9 +844,19 @@
                 height: 250px; /* Уменьшено для мобильных */
             }
             
+            .gif-wrapper.enlarged .tree-gif {
+                width: 500px; /* Увеличено адаптивно */
+                height: 500px; /* Увеличено адаптивно */
+            }
+            
             .emoji-fallback {
                 font-size: 180px; /* Уменьшено для мобильных */
                 line-height: 250px; /* Уменьшено для мобильных */
+            }
+            
+            .gif-wrapper.enlarged .emoji-fallback {
+                font-size: 360px; /* Увеличено адаптивно */
+                line-height: 500px; /* Увеличено адаптивно */
             }
             
             .gifts-container {
@@ -844,36 +885,36 @@
             }
             
             .choose-title {
-                font-size: 1.7rem; /* Уменьшено для мобильных */
-                top: -70px; /* Настроено для мобильных */
+                font-size: 1.9rem; /* Уменьшено для мобильных */
+                top: -80px; /* Настроено для мобильных */
             }
             
             .message {
-                padding: 30px 25px;
-                max-width: 400px;
+                padding: 35px 30px; /* Увеличено адаптивно */
+                max-width: 450px; /* Увеличено адаптивно */
             }
             
             .message-gif {
-                width: 80px;
-                height: 80px;
+                width: 100px; /* Увеличено адаптивно */
+                height: 100px; /* Увеличено адаптивно */
             }
             
             .message-emoji {
-                font-size: 3.5rem;
-                line-height: 80px;
+                font-size: 4.5rem; /* Увеличено адаптивно */
+                line-height: 100px; /* Увеличено адаптивно */
             }
             
             .message-title {
-                font-size: 1.8rem;
+                font-size: 2rem; /* Увеличено адаптивно */
             }
             
             .message-text {
-                font-size: 1.2rem;
+                font-size: 1.3rem; /* Увеличено адаптивно */
             }
             
             .message-button {
-                padding: 12px 35px;
-                font-size: 1rem;
+                padding: 14px 40px; /* Увеличено адаптивно */
+                font-size: 1.1rem; /* Увеличено адаптивно */
             }
         }
 
@@ -912,18 +953,28 @@
             }
             
             .choose-title {
-                font-size: 1.4rem; /* Ещё меньше для маленьких экранов */
-                top: -60px; /* Ещё выше для маленьких экранов */
+                font-size: 1.6rem; /* Уменьшено для маленьких экранов */
+                top: -70px; /* Настроено для маленьких экранов */
+            }
+            
+            .gif-wrapper.enlarged .tree-gif {
+                width: 400px; /* Увеличено адаптивно */
+                height: 400px; /* Увеличено адаптивно */
+            }
+            
+            .gif-wrapper.enlarged .emoji-fallback {
+                font-size: 300px; /* Увеличено адаптивно */
+                line-height: 400px; /* Увеличено адаптивно */
             }
             
             .message-gif {
-                width: 70px;
-                height: 70px;
+                width: 80px; /* Увеличено адаптивно */
+                height: 80px; /* Увеличено адаптивно */
             }
             
             .message-emoji {
-                font-size: 3rem;
-                line-height: 70px;
+                font-size: 3.5rem; /* Увеличено адаптивно */
+                line-height: 80px; /* Увеличено адаптивно */
             }
             
             .message-title {
@@ -945,6 +996,10 @@
                 font-size: 1.6rem;
             }
             
+            h1 i.fas.fa-tree {
+                font-size: 1.8rem; /* Увеличено адаптивно */
+            }
+            
             .subtitle {
                 font-size: 0.9rem;
             }
@@ -954,9 +1009,19 @@
                 height: 200px; /* Уменьшено для маленьких экранов */
             }
             
+            .gif-wrapper.enlarged .tree-gif {
+                width: 400px; /* Увеличено адаптивно */
+                height: 400px; /* Увеличено адаптивно */
+            }
+            
             .emoji-fallback {
                 font-size: 150px; /* Уменьшено для маленьких экранов */
                 line-height: 200px; /* Уменьшено для маленьких экранов */
+            }
+            
+            .gif-wrapper.enlarged .emoji-fallback {
+                font-size: 300px; /* Увеличено адаптивно */
+                line-height: 400px; /* Увеличено адаптивно */
             }
             
             .gifts-container {
@@ -985,35 +1050,35 @@
             }
             
             .choose-title {
-                font-size: 1.2rem; /* Минимальный размер для очень маленьких экранов */
-                top: -50px; /* Минимальная высота для очень маленьких экранов */
+                font-size: 1.4rem; /* Уменьшено для очень маленьких экранов */
+                top: -60px; /* Настроено для очень маленьких экранов */
             }
             
             .message {
-                padding: 25px 20px;
+                padding: 30px 25px; /* Увеличено адаптивно */
             }
             
             .message-gif {
-                width: 60px;
-                height: 60px;
+                width: 70px; /* Увеличено адаптивно */
+                height: 70px; /* Увеличено адаптивно */
             }
             
             .message-emoji {
-                font-size: 2.5rem;
-                line-height: 60px;
+                font-size: 3rem; /* Увеличено адаптивно */
+                line-height: 70px; /* Увеличено адаптивно */
             }
             
             .message-title {
-                font-size: 1.5rem;
+                font-size: 1.7rem; /* Увеличено адаптивно */
             }
             
             .message-text {
-                font-size: 1rem;
+                font-size: 1.1rem; /* Увеличено адаптивно */
             }
             
             .message-button {
-                padding: 10px 30px;
-                font-size: 0.95rem;
+                padding: 12px 35px; /* Увеличено адаптивно */
+                font-size: 1rem; /* Увеличено адаптивно */
             }
             
             .message-close {
@@ -1245,6 +1310,10 @@
             function showPrize(giftIndex) {
                 const gift = gifts[giftIndex];
                 
+                // Увеличиваем гифку ёлки в 2 раза
+                treeGif.classList.remove('hidden');
+                treeGif.classList.add('enlarged');
+                
                 // Блокируем все подарки после выбора
                 const allGifts = document.querySelectorAll('.gift');
                 allGifts.forEach((g, idx) => {
@@ -1314,6 +1383,8 @@
             // Скрыть выигрыш
             function hidePrize() {
                 messageContainer.classList.remove('visible');
+                // Убираем увеличение гифки
+                treeGif.classList.remove('enlarged');
                 
                 // Через время очищаем содержимое
                 setTimeout(() => {
