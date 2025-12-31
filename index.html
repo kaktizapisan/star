@@ -342,8 +342,7 @@
 
         /* УВЕЛИЧЕННАЯ ЁЛОЧКА БЕЗ РАМКИ И ТЕНИ */
         .tree-gif {
-            width: 320
-            px; /* Увеличено с 250px */
+            width: 320px; /* Увеличено с 250px */
             height: 320px; /* Увеличено с 250px */
             border-radius: 0; /* Убираем скругления */
             box-shadow: none; /* Убираем все тени */
@@ -769,11 +768,15 @@
         /* Адаптивность */
         @media (max-width: 1024px) {
             h1 {
-                font-size: 2.4rem;
+                font-size: 2.6rem; /* Увеличено с 2.4rem */
             }
             
             h1 i.fas.fa-tree {
-                font-size: 2.5rem; /* Увеличено адаптивно */
+                font-size: 2.7rem; /* Увеличено с 2.5rem */
+            }
+            
+            .subtitle {
+                font-size: 1.6rem; /* Увеличено с 1.3rem */
             }
             
             .gifts-container {
@@ -830,35 +833,42 @@
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2rem;
+                font-size: 2.3rem; /* Увеличено с 2.0rem */
+                margin-bottom: 20px; /* Увеличено */
             }
             
             h1 i.fas.fa-tree {
-                font-size: 2.2rem; /* Увеличено адаптивно */
+                font-size: 2.5rem; /* Увеличено с 2.2rem */
             }
             
             .subtitle {
-                font-size: 1.3rem; /* Увеличено адаптивно */
+                font-size: 1.5rem; /* Увеличено с 1.3rem */
+                line-height: 1.4;
+            }
+            
+            header {
+                margin-bottom: 35px; /* Увеличено для мобильных */
+                padding-bottom: 15px;
             }
             
             .tree-gif {
-                width: 300px; /* Уменьшено для мобильных */
-                height: 300px; /* Уменьшено для мобильных */
+                width: 320px; /* Увеличено с 300px */
+                height: 320px; /* Увеличено с 300px */
             }
             
             .gif-wrapper.enlarged .tree-gif {
-                width: 500px; /* Увеличено адаптивно */
-                height: 500px; /* Увеличено адаптивно */
+                width: 550px; /* Увеличено адаптивно */
+                height: 550px; /* Увеличено адаптивно */
             }
             
             .emoji-fallback {
-                font-size: 180px; /* Уменьшено для мобильных */
-                line-height: 250px; /* Уменьшено для мобильных */
+                font-size: 200px; /* Увеличено с 180px */
+                line-height: 280px; /* Увеличено с 250px */
             }
             
             .gif-wrapper.enlarged .emoji-fallback {
-                font-size: 360px; /* Увеличено адаптивно */
-                line-height: 500px; /* Увеличено адаптивно */
+                font-size: 400px; /* Увеличено с 360px */
+                line-height: 550px; /* Увеличено с 500px */
             }
             
             .gifts-container {
@@ -868,65 +878,70 @@
             }
             
             .gift {
-                width: 140px; /* Уменьшено для мобильных */
-                height: 160px; /* Уменьшено для мобильных */
+                width: 150px; /* Увеличено с 140px */
+                height: 170px; /* Увеличено с 160px */
             }
             
             .gift-gif {
-                width: 90px; /* Уменьшено для мобильных */
-                height: 90px; /* Уменьшено для мобильных */
+                width: 100px; /* Увеличено с 90px */
+                height: 100px; /* Увеличено с 90px */
             }
             
             .gift-emoji {
-                font-size: 4rem; /* Уменьшено для мобильных */
-                line-height: 90px; /* Уменьшено для мобильных */
+                font-size: 4.5rem; /* Увеличено с 4rem */
+                line-height: 100px; /* Подогнано под новую высоту */
             }
             
             .gift-name {
-                font-size: 1.1rem; /* Уменьшено для мобильных */
+                font-size: 1.2rem; /* Увеличено с 1.1rem */
             }
             
             .choose-title {
-                font-size: 1.9rem; /* Уменьшено для мобильных */
-                top: -80px; /* Настроено для мобильных */
+                font-size: 2.1rem; /* Увеличено с 1.9rem */
+                top: -90px; /* Настроено для мобильных */
             }
             
             .message {
-                padding: 35px 30px; /* Увеличено адаптивно */
-                max-width: 450px; /* Увеличено адаптивно */
+                padding: 40px 35px; /* Увеличено адаптивно */
+                max-width: 500px; /* Увеличено адаптивно */
             }
             
             .message-gif {
-                width: 100px; /* Увеличено адаптивно */
-                height: 100px; /* Увеличено адаптивно */
+                width: 120px; /* Увеличено адаптивно */
+                height: 120px; /* Увеличено адаптивно */
             }
             
             .message-emoji {
-                font-size: 4.5rem; /* Увеличено адаптивно */
-                line-height: 100px; /* Увеличено адаптивно */
+                font-size: 5rem; /* Увеличено с 4.5rem */
+                line-height: 120px; /* Подогнано под новую высоту */
             }
             
             .message-title {
-                font-size: 2rem; /* Увеличено адаптивно */
+                font-size: 2.2rem; /* Увеличено с 2.0rem */
             }
             
             .message-text {
-                font-size: 1.3rem; /* Увеличено адаптивно */
+                font-size: 1.4rem; /* Увеличено с 1.3rem */
             }
             
             .message-button {
-                padding: 14px 40px; /* Увеличено адаптивно */
-                font-size: 1.1rem; /* Увеличено адаптивно */
+                padding: 15px 45px; /* Увеличено адаптивно */
+                font-size: 1.2rem; /* Увеличено с 1.1rem */
             }
         }
 
         @media (max-width: 600px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 2.1rem; /* Увеличено с 1.8rem */
             }
             
             .subtitle {
-                font-size: 1rem;
+                font-size: 1.3rem; /* Увеличено с 1.0rem */
+            }
+            
+            .content {
+                padding: 25px 20px; /* Увеличено */
+                min-height: 480px; /* Увеличено */
             }
             
             .gifts-container {
@@ -935,95 +950,101 @@
             }
             
             .gift {
-                width: 120px; /* Ещё меньше для маленьких экранов */
-                height: 140px; /* Ещё меньше для маленьких экранов */
-                padding: 15px;
+                width: 130px; /* Увеличено с 120px */
+                height: 150px; /* Увеличено с 140px */
+                padding: 18px; /* Увеличено с 15px */
             }
             
             .gift-gif {
-                width: 80px; /* Ещё меньше для маленьких экранов */
-                height: 80px; /* Ещё меньше для маленьких экранов */
+                width: 90px; /* Увеличено с 80px */
+                height: 90px; /* Увеличено с 80px */
             }
             
             .gift-emoji {
-                font-size: 3.5rem; /* Ещё меньше для маленьких экранов */
-                line-height: 80px; /* Ещё меньше для маленьких экранов */
+                font-size: 4rem; /* Увеличено с 3.5rem */
+                line-height: 90px; /* Подогнано под новую высоту */
             }
             
             .gift-name {
-                font-size: 0.95rem; /* Ещё меньше для маленьких экранов */
+                font-size: 1.1rem; /* Увеличено с 0.95rem */
             }
             
             .choose-title {
-                font-size: 1.6rem; /* Уменьшено для маленьких экранов */
-                top: -70px; /* Настроено для маленьких экранов */
+                font-size: 1.8rem; /* Увеличено с 1.6rem */
+                top: -80px; /* Настроено */
             }
             
             .gif-wrapper.enlarged .tree-gif {
-                width: 400px; /* Увеличено адаптивно */
-                height: 400px; /* Увеличено адаптивно */
+                width: 450px; /* Увеличено адаптивно */
+                height: 450px; /* Увеличено адаптивно */
             }
             
             .gif-wrapper.enlarged .emoji-fallback {
-                font-size: 300px; /* Увеличено адаптивно */
-                line-height: 400px; /* Увеличено адаптивно */
+                font-size: 350px; /* Увеличено с 300px */
+                line-height: 450px; /* Подогнано под новую высоту */
             }
             
             .message-gif {
-                width: 80px; /* Увеличено адаптивно */
-                height: 80px; /* Увеличено адаптивно */
+                width: 100px; /* Увеличено с 80px */
+                height: 100px; /* Увеличено с 80px */
             }
             
             .message-emoji {
-                font-size: 3.5rem; /* Увеличено адаптивно */
-                line-height: 80px; /* Увеличено адаптивно */
+                font-size: 4.5rem; /* Увеличено с 3.5rem */
+                line-height: 100px; /* Подогнано под новую высоту */
             }
             
             .message-title {
-                font-size: 1.5rem;
+                font-size: 2.0rem; /* Увеличено с 1.5rem */
             }
             
             .message-text {
-                font-size: 1.1rem;
+                font-size: 1.3rem; /* Увеличено с 1.1rem */
             }
         }
 
         @media (max-width: 480px) {
             .content {
-                padding: 20px 15px;
-                min-height: 450px;
+                padding: 30px 20px; /* Увеличено */
+                min-height: 500px; /* Увеличено */
             }
 
             h1 {
-                font-size: 1.6rem;
+                font-size: 1.9rem; /* Увеличено с 1.6rem */
+                margin-bottom: 25px; /* Увеличено */
             }
             
             h1 i.fas.fa-tree {
-                font-size: 1.8rem; /* Увеличено адаптивно */
+                font-size: 2.2rem; /* Увеличено с 1.8rem */
             }
             
             .subtitle {
-                font-size: 0.9rem;
+                font-size: 1.2rem; /* Увеличено с 0.9rem */
+                line-height: 1.3;
+            }
+            
+            header {
+                margin-bottom: 40px; /* Увеличено для очень маленьких экранов */
             }
             
             .tree-gif {
-                width: 300px; /* Уменьшено для маленьких экранов */
-                height: 300px; /* Уменьшено для маленьких экранов */
+                width: 320px; /* Увеличено с 300px */
+                height: 320px; /* Увеличено с 300px */
             }
             
             .gif-wrapper.enlarged .tree-gif {
-                width: 400px; /* Увеличено адаптивно */
-                height: 400px; /* Увеличено адаптивно */
+                width: 450px; /* Увеличено адаптивно */
+                height: 450px; /* Увеличено адаптивно */
             }
             
             .emoji-fallback {
-                font-size: 150px; /* Уменьшено для маленьких экранов */
-                line-height: 200px; /* Уменьшено для маленьких экранов */
+                font-size: 180px; /* Увеличено с 150px */
+                line-height: 250px; /* Увеличено с 200px */
             }
             
             .gif-wrapper.enlarged .emoji-fallback {
-                font-size: 300px; /* Увеличено адаптивно */
-                line-height: 400px; /* Увеличено адаптивно */
+                font-size: 320px; /* Увеличено с 300px */
+                line-height: 450px; /* Подогнано под новую высоту */
             }
             
             .gifts-container {
@@ -1032,63 +1053,87 @@
             }
             
             .gift {
-                width: 110px; /* Минимальный размер для очень маленьких экранов */
-                height: 130px; /* Минимальный размер для очень маленьких экранов */
-                padding: 10px;
+                width: 120px; /* Увеличено с 110px */
+                height: 140px; /* Увеличено с 130px */
+                padding: 15px; /* Увеличено с 10px */
             }
 
             .gift-gif {
-                width: 70px; /* Минимальный размер для очень маленьких экранов */
-                height: 70px; /* Минимальный размер для очень маленьких экранов */
+                width: 80px; /* Увеличено с 70px */
+                height: 80px; /* Увеличено с 70px */
             }
 
             .gift-emoji {
-                font-size: 3rem; /* Минимальный размер для очень маленьких экранов */
-                line-height: 70px; /* Минимальный размер для очень маленьких экранов */
+                font-size: 3.5rem; /* Увеличено с 3rem */
+                line-height: 80px; /* Подогнано под новую высоту */
             }
             
             .gift-name {
-                font-size: 0.85rem; /* Минимальный размер для очень маленьких экранов */
+                font-size: 1.0rem; /* Увеличено с 0.85rem */
             }
             
             .choose-title {
-                font-size: 1.4rem; /* Уменьшено для очень маленьких экранов */
-                top: -60px; /* Настроено для очень маленьких экранов */
+                font-size: 1.6rem; /* Увеличено с 1.4rem */
+                top: -70px; /* Настроено */
             }
             
             .message {
-                padding: 30px 25px; /* Увеличено адаптивно */
+                padding: 35px 30px; /* Увеличено адаптивно */
             }
             
             .message-gif {
-                width: 70px; /* Увеличено адаптивно */
-                height: 70px; /* Увеличено адаптивно */
+                width: 90px; /* Увеличено с 70px */
+                height: 90px; /* Увеличено с 70px */
             }
             
             .message-emoji {
-                font-size: 3rem; /* Увеличено адаптивно */
-                line-height: 70px; /* Увеличено адаптивно */
+                font-size: 4rem; /* Увеличено с 3rem */
+                line-height: 90px; /* Подогнано под новую высоту */
             }
             
             .message-title {
-                font-size: 1.7rem; /* Увеличено адаптивно */
+                font-size: 1.9rem; /* Увеличено с 1.7rem */
             }
             
             .message-text {
-                font-size: 1.1rem; /* Увеличено адаптивно */
+                font-size: 1.3rem; /* Увеличено с 1.1rem */
             }
             
             .message-button {
-                padding: 12px 35px; /* Увеличено адаптивно */
-                font-size: 1rem; /* Увеличено адаптивно */
+                padding: 14px 40px; /* Увеличено с 12px 35px */
+                font-size: 1.2rem; /* Увеличено с 1.0rem */
             }
             
             .message-close {
-                width: 24px;
-                height: 24px;
-                font-size: 10px;
-                top: 10px;
-                right: 10px;
+                width: 28px; /* Увеличено с 24px */
+                height: 28px; /* Увеличено с 24px */
+                font-size: 12px; /* Увеличено с 10px */
+                top: 12px;
+                right: 12px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 1.7rem; /* Увеличено для очень маленьких экранов */
+            }
+            
+            .subtitle {
+                font-size: 1.1rem; /* Увеличено для очень маленьких экранов */
+            }
+            
+            .tree-gif {
+                width: 280px; /* Увеличено */
+                height: 280px; /* Увеличено */
+            }
+            
+            .emoji-fallback {
+                font-size: 160px; /* Увеличено */
+                line-height: 220px; /* Увеличено */
+            }
+            
+            .choose-title {
+                font-size: 1.5rem; /* Увеличено для очень маленьких экранов */
             }
         }
     </style>
