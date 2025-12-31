@@ -512,6 +512,12 @@
             opacity: 1;
         }
 
+        .choose-title.hidden {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+            pointer-events: none;
+        }
+
         /* СООБЩЕНИЕ О ВЫИГРЫШЕ - УВЕЛИЧЕНО */
         .message-container {
             position: absolute;
@@ -1327,6 +1333,10 @@
             // Показать выигрыш с GIF выбранного подарка
             function showPrize(giftIndex) {
                 const gift = gifts[giftIndex];
+                
+                // Скрываем заголовок "Выберите подарок"
+                chooseTitle.classList.remove('visible');
+                chooseTitle.classList.add('hidden');
                 
                 // Увеличиваем гифку ёлки в 2 раза
                 treeGif.classList.remove('hidden');
