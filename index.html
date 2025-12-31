@@ -665,30 +665,9 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
+        /* Убрали кнопку закрытия */
         .message-close {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 1002;
-        }
-
-        .message-close:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            transform: rotate(90deg);
-            border-color: rgba(255, 255, 255, 0.25);
+            display: none; /* Скрываем кнопку закрытия */
         }
 
         /* УЛУЧШЕННОЕ КОНФЕТТИ */
@@ -986,7 +965,7 @@
             
             .message-gif {
                 width: 100px; /* Увеличено с 80px */
-                height: 100px; /* Увеличено с 80px */
+                height: 100px; /* Увещено с 80px */
             }
             
             .message-emoji {
@@ -1102,14 +1081,6 @@
             .message-button {
                 padding: 14px 40px; /* Увеличено с 12px 35px */
                 font-size: 1.2rem; /* Увеличено с 1.0rem */
-            }
-            
-            .message-close {
-                width: 28px; /* Увеличено с 24px */
-                height: 28px; /* Увеличено с 24px */
-                font-size: 12px; /* Увеличено с 10px */
-                top: 12px;
-                right: 12px;
             }
         }
         
@@ -1390,9 +1361,6 @@
                 
                 // HTML для сообщения с GIF подарка
                 messageElement.innerHTML = `
-                    <button class="message-close">
-                        <i class="fas fa-times"></i>
-                    </button>
                     <h2 class="message-title">
                         <i class="fas fa-gift" style="color: ${gift.color}"></i>
                         Поздравляем!
@@ -1409,35 +1377,11 @@
                 messageContainer.appendChild(overlay);
                 messageContainer.appendChild(messageElement);
                 
-                // Добавляем кнопку закрытия
-                const closeButton = messageElement.querySelector('.message-close');
-                closeButton.addEventListener('click', function() {
-                    hidePrize();
-                });
-                
-                // Закрытие по клику на оверлей
-                overlay.addEventListener('click', function() {
-                    hidePrize();
-                });
-                
                 // Делаем контейнер сообщения видимым
                 messageContainer.classList.add('visible');
                 
                 // Создаем реалистичное конфетти
                 createRealisticConfetti();
-            }
-            
-            // Скрыть выигрыш
-            function hidePrize() {
-                messageContainer.classList.remove('visible');
-                // Убираем увеличение гифки
-                treeGif.classList.remove('enlarged');
-                
-                // Через время очищаем содержимое
-                setTimeout(() => {
-                    messageContainer.innerHTML = '';
-                    // prizeShown остаётся true - подарок можно выбрать только один раз!
-                }, 500);
             }
             
             // Создание РЕАЛИСТИЧНОГО конфетти
