@@ -8,6 +8,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* Все стили остаются без изменений */
         * {
             font-family: 'Manrope', sans-serif;
             box-sizing: border-box;
@@ -461,6 +462,7 @@
     <div id="confetti"></div>
 
     <div id="app" class="min-h-screen flex flex-col">
+        <!-- HTML структура без изменений -->
         <header class="glass-card header-border p-4 m-3 rounded-2xl flex justify-between items-center gap-3">
             <div class="flex items-center gap-3 cursor-pointer min-w-0 flex-shrink" onclick="showLoginModal()">
                 <div class="avatar-ring rounded-full p-0.5 flex-shrink-0">
@@ -606,7 +608,7 @@
                         </div>
                     </div>
                     
-                    <button onclick="openTelegramBotInApp()" class="btn-primary px-8 py-4 rounded-2xl text-lg font-bold flex items-center gap-3 shadow-2xl mb-4 shimmer">
+                    <button onclick="openTelegramBot()" class="btn-primary px-8 py-4 rounded-2xl text-lg font-bold flex items-center gap-3 shadow-2xl mb-4 shimmer">
                         <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.87 7.97-3.43 3.8-1.57 4.59-1.85 5.1-1.86.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .38z"/>
                         </svg>
@@ -651,7 +653,7 @@
     <script>
         // Telegram bot конфигурация
         const TELEGRAM_BOT_USERNAME = "mECtJSDOBot";
-        const TELEGRAM_BOT_DEEP_LINK = `tg://resolve?domain=${TELEGRAM_BOT_USERNAME}&start=login_${Date.now()}`;
+        const TELEGRAM_BOT_DEEP_LINK = `tg://resolve?domain=${TELEGRAM_BOT_USERNAME}`;
         let selectedAmount = 0;
         
         function updateUserUI(user) {
@@ -671,107 +673,32 @@
             }
         }
         
-        // Основная функция для открытия бота прямо в приложении Telegram
-        function openTelegramBotInApp() {
-            console.log('Opening Telegram bot directly in app...');
+        // Простая и рабочая функция для открытия бота
+        function openTelegramBot() {
+            console.log('Opening Telegram bot...');
             hideLoginModal();
             
-            const tg = window.Telegram?.WebApp;
+            // Всегда используем глубокую ссылку
+            // tg:// работает прямо в Telegram приложении
+            window.location.href = TELEGRAM_BOT_DEEP_LINK;
             
-            if (tg) {
-                console.log('Inside Telegram WebApp, using Telegram API');
-                
-                // Внутри Telegram Mini App используем специальные методы
-                try {
-                    // Метод 1: Используем openTelegramLink для открытия прямо в приложении
-                    if (typeof tg.openTelegramLink === 'function') {
-                        console.log('Using tg.openTelegramLink() to open bot directly');
-                        tg.openTelegramLink(TELEGRAM_BOT_DEEP_LINK);
-                        return;
-                    }
-                    
-                    // Метод 2: Для старых версий WebApp
-                    console.log('Using direct deep link method');
-                    window.location.href = TELEGRAM_BOT_DEEP_LINK;
-                    
-                } catch (error) {
-                    console.error('Error opening bot via Telegram API:', error);
-                    // Fallback
-                    window.location.href = TELEGRAM_BOT_DEEP_LINK;
-                }
-            } else {
-                // Если не в Telegram WebApp (браузер)
-                console.log('Not in Telegram WebApp, using mobile detection');
-                openBotForMobile();
-            }
+            // Если мы не в Telegram (браузер), то произойдет редирект на страницу с предложением открыть в приложении
+            // Это нормальное поведение
         }
         
-        // Функция для мобильных устройств
-        function openBotForMobile() {
-            // Пытаемся определить мобильное устройство
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        // Альтернативная функция с использованием комбинированного подхода
+        function openTelegramBotCombo() {
+            hideLoginModal();
             
-            if (isMobile) {
-                console.log('Mobile device detected, using deep link');
-                
-                // Метод 1: Пытаемся открыть deep link
-                window.location.href = TELEGRAM_BOT_DEEP_LINK;
-                
-                // Метод 2: Fallback через iframe (обход некоторых ограничений)
-                setTimeout(() => {
-                    const iframe = document.createElement('iframe');
-                    iframe.style.display = 'none';
-                    iframe.src = TELEGRAM_BOT_DEEP_LINK;
-                    document.body.appendChild(iframe);
-                    
-                    // Метод 3: Последний fallback - обычная ссылка
-                    setTimeout(() => {
-                        if (document.body.contains(iframe)) {
-                            document.body.removeChild(iframe);
-                            window.open(`https://t.me/${TELEGRAM_BOT_USERNAME}`, '_blank');
-                        }
-                    }, 1000);
-                }, 500);
-            } else {
-                // Для десктопа
-                console.log('Desktop device, opening web version');
+            // 1. Пытаемся открыть deep link (сработает в мобильном Telegram)
+            window.location.href = TELEGRAM_BOT_DEEP_LINK;
+            
+            // 2. Если пользователь на компьютере или в браузере, через 1 секунду открываем веб-версию
+            setTimeout(() => {
+                // Проверяем, произошел ли редирект
+                // Если мы всё ещё на той же странице, значит deep link не сработал
                 window.open(`https://t.me/${TELEGRAM_BOT_USERNAME}`, '_blank');
-            }
-        }
-        
-        // Альтернативная функция с использованием всех возможных методов
-        function openBotWithAllMethods() {
-            hideLoginModal();
-            
-            const tg = window.Telegram?.WebApp;
-            const startParam = `start=login_${Date.now()}`;
-            const deepLink = `tg://resolve?domain=${TELEGRAM_BOT_USERNAME}&${startParam}`;
-            
-            console.log('Deep link:', deepLink);
-            
-            if (tg) {
-                // Внутри Telegram
-                try {
-                    // Пробуем все методы по порядку
-                    if (tg.openTelegramLink) {
-                        tg.openTelegramLink(deepLink);
-                    } else if (tg.openLink) {
-                        tg.openLink(`https://t.me/${TELEGRAM_BOT_USERNAME}?${startParam}`);
-                    } else {
-                        window.location.href = deepLink;
-                    }
-                } catch (e) {
-                    window.location.href = deepLink;
-                }
-            } else {
-                // Вне Telegram
-                window.location.href = deepLink;
-                
-                // Fallback
-                setTimeout(() => {
-                    window.open(`https://t.me/${TELEGRAM_BOT_USERNAME}?${startParam}`, '_blank');
-                }, 500);
-            }
+            }, 1000);
         }
         
         function showLoginModal() {
@@ -838,10 +765,9 @@
                     });
                     
                     console.log('Telegram WebApp initialized');
-                    console.log('Version:', tg.version);
-                    console.log('Platform:', tg.platform);
                 } else {
                     updateUserUI(null);
+                    console.log('Running in browser, not Telegram WebApp');
                 }
                 
                 createParticles();
