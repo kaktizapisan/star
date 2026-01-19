@@ -8,6 +8,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* Все ваши стили остаются без изменений */
         * {
             font-family: 'Manrope', sans-serif;
             box-sizing: border-box;
@@ -651,63 +652,150 @@
     <script>
         // Telegram bot конфигурация
         const TELEGRAM_BOT_USERNAME = "mECtJSDOBot";
-        const TELEGRAM_BOT_DEEP_LINK = `tg://resolve?domain=${TELEGRAM_BOT_USERNAME}`;
-        const TELEGRAM_BOT_WEB_URL = `https://t.me/${TELEGRAM_BOT_USERNAME}`;
+        const TELEGRAM_BOT_DEEP_LINK = `https://t.me/${TELEGRAM_BOT_USERNAME}?start=webapp`;
         let selectedAmount = 0;
         
-        // Основная функция для открытия Telegram бота
+        // 1. РАБОЧАЯ функция для открытия бота Telegram
+        function openTelegramBot() {
+            console.log('Opening Telegram bot using method 1...');
+            hideLoginModal();
+            
+            // ОСНОВНОЙ МЕТОД: Простое перенаправление на прямую ссылку
+            // Это самый надежный способ в WebApp
+            window.location.href = TELEGRAM_BOT_DEEP_LINK;
+        }
+        
+        // 2. Альтернативный метод для старых версий WebApp
+        function openTelegramBotAlternative() {
+            console.log('Opening Telegram bot using alternative method...');
+            hideLoginModal();
+            
+            const tg = window.Telegram?.WebApp;
+            
+            if (tg) {
+                try {
+                    // Метод 1: Используем openLink
+                    if (typeof tg.openLink === 'function') {
+                        tg.openLink(TELEGRAM_BOT_DEEP_LINK);
+                        return;
+                    }
+                    
+                    // Метод 2: Используем openTelegramLink
+                    if (typeof tg.openTelegramLink === 'function') {
+                        // Формируем deep link для Telegram
+                        const telegramDeepLink = `tg://resolve?domain=${TELEGRAM_BOT_USERNAME}&start=webapp`;
+                        tg.openTelegramLink(telegramDeepLink);
+                        return;
+                    }
+                    
+                    // Метод 3: Прямой редирект как последний вариант
+                    window.location.href = TELEGRAM_BOT_DEEP_LINK;
+                    
+                } catch (error) {
+                    console.error('Error with Telegram API:', error);
+                    window.location.href = TELEGRAM_BOT_DEEP_LINK;
+                }
+            } else {
+                // Если не в WebApp, используем стандартный подход
+                window.location.href = TELEGRAM_BOT_DEEP_LINK;
+            }
+        }
+        
+        // 3. Самый надежный метод с таймаутом
+        function openTelegramBotReliable() {
+            console.log('Opening Telegram bot using reliable method...');
+            hideLoginModal();
+            
+            // Создаем невидимую ссылку и кликаем по ней
+            const link = document.createElement('a');
+            link.href = TELEGRAM_BOT_DEEP_LINK;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            
+            // Пытаемся кликнуть
+            link.click();
+            
+            // Удаляем ссылку через секунду
+            setTimeout(() => {
+                document.body.removeChild(link);
+                
+                // Проверяем, если мы все еще на странице, пробуем другие методы
+                setTimeout(() => {
+                    const tg = window.Telegram?.WebApp;
+                    if (tg) {
+                        // Пробуем метод openLink
+                        try {
+                            if (typeof tg.openLink === 'function') {
+                                tg.openLink(TELEGRAM_BOT_DEEP_LINK);
+                            }
+                        } catch (e) {
+                            console.log('openLink failed, trying direct location change');
+                            window.location.href = TELEGRAM_BOT_DEEP_LINK;
+                        }
+                    }
+                }, 1000);
+            }, 100);
+        }
+        
+        // 4. Универсальная функция, которая пробует все методы
+        function openTelegramBotUniversal() {
+            console.log('Trying all methods to open Telegram bot...');
+            hideLoginModal();
+            
+            // Метод 1: Прямое изменение location (самый простой)
+            try {
+                window.location.href = TELEGRAM_BOT_DEEP_LINK;
+            } catch (e) {
+                console.log('Method 1 failed:', e);
+            }
+            
+            // Даем время первому методу сработать
+            setTimeout(() => {
+                // Если мы все еще здесь, пробуем другие методы
+                const tg = window.Telegram?.WebApp;
+                
+                // Метод 2: Через Telegram WebApp API
+                if (tg) {
+                    try {
+                        if (typeof tg.openLink === 'function') {
+                            tg.openLink(TELEGRAM_BOT_DEEP_LINK);
+                            return;
+                        }
+                    } catch (e) {
+                        console.log('Method 2 failed:', e);
+                    }
+                    
+                    // Метод 3: Через Telegram deep link
+                    try {
+                        if (typeof tg.openTelegramLink === 'function') {
+                            tg.openTelegramLink(`tg://resolve?domain=${TELEGRAM_BOT_USERNAME}`);
+                            return;
+                        }
+                    } catch (e) {
+                        console.log('Method 3 failed:', e);
+                    }
+                }
+                
+                // Метод 4: Через window.open как последний вариант
+                try {
+                    window.open(TELEGRAM_BOT_DEEP_LINK, '_blank');
+                } catch (e) {
+                    console.log('All methods failed');
+                    alert('Не удалось открыть Telegram. Пожалуйста, перейдите в @' + TELEGRAM_BOT_USERNAME + ' вручную.');
+                }
+            }, 500);
+        }
+        
+        // ОБНОВЛЕНИЕ: Используйте эту функцию - она самая надежная!
         function openTelegramBot() {
             console.log('Opening Telegram bot...');
             hideLoginModal();
             
-            // Проверяем, находимся ли мы в Telegram WebApp
-            const tg = window.Telegram?.WebApp;
-            
-            if (tg) {
-                // В Telegram WebApp используем официальные методы API
-                try {
-                    // Метод 1: openTelegramLink (самый надежный для deep links)
-                    if (typeof tg.openTelegramLink === 'function') {
-                        tg.openTelegramLink(TELEGRAM_BOT_DEEP_LINK);
-                        console.log('Using openTelegramLink method');
-                        return;
-                    }
-                    
-                    // Метод 2: openLink (альтернатива)
-                    if (typeof tg.openLink === 'function') {
-                        tg.openLink(TELEGRAM_BOT_WEB_URL);
-                        console.log('Using openLink method');
-                        return;
-                    }
-                    
-                    // Метод 3: Если оба метода недоступны, пробуем напрямую
-                    window.location.href = TELEGRAM_BOT_DEEP_LINK;
-                    
-                } catch (error) {
-                    console.error('Telegram API error:', error);
-                    // Fallback на обычный редирект
-                    window.location.href = TELEGRAM_BOT_DEEP_LINK;
-                }
-            } else {
-                // Если не в Telegram WebApp, используем комбинированный подход
-                openTelegramBotFallback();
-            }
-        }
-        
-        // Fallback метод для обычных браузеров
-        function openTelegramBotFallback() {
-            // Пытаемся открыть deep link через iframe (работает в мобильных браузерах)
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = TELEGRAM_BOT_DEEP_LINK;
-            document.body.appendChild(iframe);
-            
-            // Если deep link не сработал (пользователь не в Telegram приложении),
-            // через 500ms открываем веб-версию
-            setTimeout(() => {
-                document.body.removeChild(iframe);
-                window.open(TELEGRAM_BOT_WEB_URL, '_blank');
-            }, 500);
+            // Самый простой и надежный способ - прямой переход
+            // В большинстве случаев это сработает в WebApp
+            window.location.href = `https://t.me/${TELEGRAM_BOT_USERNAME}`;
         }
         
         function updateUserUI(user) {
@@ -731,7 +819,6 @@
             document.getElementById('loginModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             
-            // Показываем кнопку "Назад" в Telegram WebApp
             const tg = window.Telegram?.WebApp;
             if (tg) {
                 tg.BackButton.show();
@@ -743,7 +830,6 @@
             document.getElementById('loginModal').classList.add('hidden');
             document.body.style.overflow = '';
             
-            // Скрываем кнопку "Назад" в Telegram WebApp
             const tg = window.Telegram?.WebApp;
             if (tg) {
                 tg.BackButton.hide();
@@ -754,7 +840,6 @@
             document.getElementById('topUpModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             
-            // Показываем кнопку "Назад" в Telegram WebApp
             const tg = window.Telegram?.WebApp;
             if (tg) {
                 tg.BackButton.show();
@@ -766,7 +851,6 @@
             document.getElementById('topUpModal').classList.add('hidden');
             document.body.style.overflow = '';
             
-            // Скрываем кнопку "Назад" в Telegram WebApp
             const tg = window.Telegram?.WebApp;
             if (tg) {
                 tg.BackButton.hide();
@@ -808,7 +892,6 @@
                         updateUserUI(null);
                     }
                     
-                    // Настраиваем кнопку "Назад"
                     tg.BackButton.onClick(() => {
                         if (!document.getElementById('loginModal').classList.contains('hidden')) {
                             hideLoginModal();
