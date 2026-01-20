@@ -21,6 +21,19 @@
             -webkit-overflow-scrolling: touch;
         }
         
+        body.modal-open {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        @media (max-height: 500px) {
+            body.modal-open {
+                position: absolute;
+            }
+        }
+        
         .bg-animated {
             position: fixed;
             top: 0;
@@ -277,12 +290,6 @@
             flex-shrink: 0;
         }
         
-        .login-hint {
-            color: rgba(255, 255, 255, 0.7) !important;
-            font-weight: 500 !important;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        }
-        
         .balance-label {
             color: rgba(255, 255, 255, 0.7) !important;
             font-weight: 500 !important;
@@ -427,9 +434,122 @@
             display: none !important;
         }
         
-        /* АДАПТИВНЫЕ СТИЛИ ТОЛЬКО ДЛЯ МОДАЛЬНОГО ОКНА */
+        /* АДАПТИВНЫЕ СТИЛИ */
+        
+        /* Для средних экранов */
+        @media (max-width: 400px) {
+            header .min-w-0 {
+                min-width: 80px;
+            }
+            
+            header .max-w-\[120px\] {
+                max-width: 100px;
+            }
+            
+            header .text-base {
+                font-size: 14px;
+            }
+        }
+        
+        /* Для маленьких экранов */
+        @media (max-width: 364px) {
+            header .min-w-0 {
+                min-width: 70px;
+            }
+            
+            header .max-w-\[120px\] {
+                max-width: 90px;
+            }
+            
+            #userName {
+                font-size: 13px;
+            }
+            
+            header .text-right {
+                min-width: 80px;
+            }
+            
+            header .flex.justify-between {
+                gap: 8px;
+            }
+            
+            header .gap-3 {
+                gap: 8px !important;
+            }
+            
+            footer .text-xs {
+                font-size: 10px !important;
+            }
+            
+            footer .w-6.h-6 {
+                width: 20px !important;
+                height: 20px !important;
+            }
+            
+            footer .p-3 {
+                padding: 8px !important;
+            }
+            
+            .grid.grid-cols-2 {
+                gap: 10px !important;
+                padding: 0 4px;
+            }
+            
+            .glass-card.p-4 {
+                padding: 12px !important;
+            }
+            
+            .item-image.w-20.h-20 {
+                width: 60px !important;
+                height: 60px !important;
+            }
+            
+            .price-tag.text-lg {
+                font-size: 16px !important;
+            }
+            
+            .btn-primary.w-full.py-2.5 {
+                padding-top: 8px !important;
+                padding-bottom: 8px !important;
+                font-size: 12px !important;
+            }
+        }
+        
+        /* Для очень маленьких экранов */
+        @media (max-width: 320px) {
+            header {
+                padding: 10px !important;
+                margin: 8px !important;
+            }
+            
+            header .w-12.h-12 {
+                width: 40px !important;
+                height: 40px !important;
+            }
+            
+            .btn-primary.px-4 {
+                padding-left: 12px !important;
+                padding-right: 12px !important;
+                font-size: 12px !important;
+            }
+            
+            #balance {
+                font-size: 16px !important;
+            }
+            
+            .title-gif {
+                width: 40px !important;
+                height: 40px !important;
+            }
+            
+            .section-title.text-2xl {
+                font-size: 18px !important;
+                gap: 8px !important;
+            }
+        }
+        
+        /* Адаптивность модального окна авторизации */
         @media (max-width: 640px) {
-            /* Адаптивность модального окна авторизации */
             #loginModal .gift-swing img {
                 width: 150px !important;
                 height: 150px !important;
@@ -485,6 +605,23 @@
             
             #loginModal .flex.gap-3 {
                 gap: 8px !important;
+            }
+            
+            #topUpModal .modal-content {
+                margin: 16px !important;
+                max-width: calc(100vw - 32px) !important;
+            }
+            
+            #topUpModal .glass-card.py-3.5 {
+                padding-top: 10px !important;
+                padding-bottom: 10px !important;
+                font-size: 14px !important;
+            }
+            
+            #topUpModal .btn-primary.w-full {
+                font-size: 14px !important;
+                padding-top: 12px !important;
+                padding-bottom: 12px !important;
             }
         }
         
@@ -569,23 +706,36 @@
             }
         }
         
-        /* Адаптивность модального окна пополнения баланса */
-        @media (max-width: 480px) {
-            #topUpModal .modal-content {
-                margin: 16px !important;
-                max-width: calc(100vw - 32px) !important;
+        /* Для таблетов */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .grid.grid-cols-2 {
+                grid-template-columns: repeat(3, 1fr);
             }
             
-            #topUpModal .glass-card.py-3.5 {
-                padding-top: 10px !important;
-                padding-bottom: 10px !important;
-                font-size: 14px !important;
+            .title-gif {
+                width: 60px !important;
+                height: 60px !important;
             }
             
-            #topUpModal .btn-primary.w-full {
-                font-size: 14px !important;
-                padding-top: 12px !important;
-                padding-bottom: 12px !important;
+            .section-title.text-2xl {
+                font-size: 28px !important;
+            }
+        }
+        
+        /* Для десктопов */
+        @media (min-width: 1025px) {
+            .grid.grid-cols-2 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            main {
+                max-width: 1200px;
+                margin: 0 auto;
             }
         }
     </style>
@@ -599,7 +749,7 @@
 
     <div id="app" class="min-h-screen flex flex-col">
         <header class="glass-card header-border p-4 m-3 rounded-2xl flex justify-between items-center gap-3">
-            <div class="flex items-center gap-3 cursor-pointer min-w-0 flex-shrink" onclick="showLoginModal()">
+            <div class="flex items-center gap-3 min-w-0 flex-shrink">
                 <div class="avatar-ring rounded-full p-0.5 flex-shrink-0">
                     <div id="userAvatar" class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-xl font-bold overflow-hidden">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -609,7 +759,6 @@
                 </div>
                 <div class="min-w-0">
                     <p id="userName" class="user-name text-base truncate max-w-[120px]">Гость</p>
-                    <p class="login-hint text-xs">Нажмите для входа</p>
                 </div>
             </div>
             
@@ -743,15 +892,15 @@
                         </div>
                     </div>
                     
-                    <!-- Кнопка "Войти через Телеграм" - поднята выше -->
+                    <!-- Кнопка "Войти через Телеграм" -->
                     <a href="https://t.me/mECtJSDOBot" target="_blank" onclick="hideLoginModal()" class="btn-primary px-8 py-4 rounded-2xl text-lg font-bold flex items-center justify-center gap-3 shadow-2xl mb-6 shimmer no-underline">
                         <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.87 7.97-3.43 3.8-1.57 4.59-1.85 5.1-1.86.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .38z"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.20-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.87 7.97-3.43 3.8-1.57 4.59-1.85 5.10-1.86.11 0 .37.03.54.17.14.12.18.28.20.45-.01.06.01.24 0 .38z"/>
                         </svg>
                         Войти через Телеграм
                     </a>
                     
-                    <!-- Кнопка "Назад" - тоже поднята выше -->
+                    <!-- Кнопка "Назад" -->
                     <button onclick="hideLoginModal()" class="glass-card px-6 py-3 rounded-full flex items-center gap-2 hover:bg-white/10 transition-all text-gray-400 hover:text-white font-medium mb-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -769,10 +918,10 @@
             <h2 class="text-xl font-bold mb-5 text-center tracking-tight">Пополнение баланса</h2>
             
             <div class="grid grid-cols-2 gap-3 mb-5">
-                <button onclick="selectAmount(100)" class="glass-card py-3.5 rounded-xl hover:bg-white/10 transition-all font-semibold amount-btn hover-glow">100 ₽</button>
-                <button onclick="selectAmount(250)" class="glass-card py-3.5 rounded-xl hover:bg-white/10 transition-all font-semibold amount-btn hover-glow">250 ₽</button>
-                <button onclick="selectAmount(500)" class="glass-card py-3.5 rounded-xl hover:bg-white/10 transition-all font-semibold amount-btn hover-glow">500 ₽</button>
-                <button onclick="selectAmount(1000)" class="glass-card py-3.5 rounded-xl hover:bg-white/10 transition-all font-semibold amount-btn hover-glow">1000 ₽</button>
+                <button onclick="selectAmount(100, event)" class="glass-card py-3.5 rounded-xl hover:bg-white/10 transition-all font-semibold amount-btn hover-glow">100 ₽</button>
+                <button onclick="selectAmount(250, event)" class="glass-card py-3.5 rounded-xl hover:bg-white/10 transition-all font-semibold amount-btn hover-glow">250 ₽</button>
+                <button onclick="selectAmount(500, event)" class="glass-card py-3.5 rounded-xl hover:bg-white/10 transition-all font-semibold amount-btn hover-glow">500 ₽</button>
+                <button onclick="selectAmount(1000, event)" class="glass-card py-3.5 rounded-xl hover:bg-white/10 transition-all font-semibold amount-btn hover-glow">1000 ₽</button>
             </div>
             
             <input type="number" id="customAmount" placeholder="Своя сумма" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 mb-5 focus:outline-none focus:border-indigo-500 transition-all font-medium">
@@ -788,28 +937,40 @@
     </div>
 
     <script>
-        // Упрощенный код - только базовая функциональность
         let selectedAmount = 0;
         
         function updateUserUI(user) {
+            const userAvatar = document.getElementById('userAvatar');
+            const userName = document.getElementById('userName');
+            
             if (user) {
                 const fullName = user.first_name + (user.last_name ? ' ' + user.last_name : '');
-                document.getElementById('userName').textContent = fullName;
+                userName.textContent = fullName;
                 
                 if (user.photo_url) {
-                    document.getElementById('userAvatar').innerHTML = `<img src="${user.photo_url}" class="w-full h-full object-cover rounded-full" onerror="this.parentElement.textContent='${user.first_name.charAt(0).toUpperCase()}'">`;
+                    const img = document.createElement('img');
+                    img.src = user.photo_url;
+                    img.className = 'w-full h-full object-cover rounded-full';
+                    img.onerror = function() {
+                        this.parentElement.innerHTML = user.first_name.charAt(0).toUpperCase();
+                        this.parentElement.classList.add('flex', 'items-center', 'justify-center', 'text-xl', 'font-bold');
+                    };
+                    userAvatar.innerHTML = '';
+                    userAvatar.appendChild(img);
                 } else {
-                    document.getElementById('userAvatar').innerHTML = '';
-                    document.getElementById('userAvatar').textContent = user.first_name.charAt(0).toUpperCase();
+                    userAvatar.innerHTML = '';
+                    userAvatar.textContent = user.first_name.charAt(0).toUpperCase();
+                    userAvatar.classList.add('flex', 'items-center', 'justify-center', 'text-xl', 'font-bold');
                 }
             } else {
-                document.getElementById('userName').textContent = 'Гость';
-                document.getElementById('userAvatar').innerHTML = `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
+                userName.textContent = 'Гость';
+                userAvatar.innerHTML = `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
             }
         }
         
         function showLoginModal() {
             document.getElementById('loginModal').classList.remove('hidden');
+            document.body.classList.add('modal-open');
             document.body.style.overflow = 'hidden';
             
             const tg = window.Telegram?.WebApp;
@@ -821,6 +982,7 @@
         
         function hideLoginModal() {
             document.getElementById('loginModal').classList.add('hidden');
+            document.body.classList.remove('modal-open');
             document.body.style.overflow = '';
             
             const tg = window.Telegram?.WebApp;
@@ -831,6 +993,7 @@
         
         function showTopUpModal() {
             document.getElementById('topUpModal').classList.remove('hidden');
+            document.body.classList.add('modal-open');
             document.body.style.overflow = 'hidden';
             
             const tg = window.Telegram?.WebApp;
@@ -842,6 +1005,7 @@
         
         function hideTopUpModal() {
             document.getElementById('topUpModal').classList.add('hidden');
+            document.body.classList.remove('modal-open');
             document.body.style.overflow = '';
             
             const tg = window.Telegram?.WebApp;
@@ -850,23 +1014,34 @@
             }
         }
         
-        function selectAmount(amount) {
+        function selectAmount(amount, event) {
             selectedAmount = amount;
             document.getElementById('customAmount').value = amount;
             
             document.querySelectorAll('.amount-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600/30', 'border-indigo-500');
+                btn.classList.remove('bg-indigo-600/30', 'border', 'border-indigo-500');
+                btn.style.background = '';
             });
-            event.target.classList.add('bg-indigo-600/30', 'border-indigo-500');
+            
+            if (event && event.target) {
+                event.target.classList.add('bg-indigo-600/30', 'border', 'border-indigo-500');
+            }
         }
         
         function processPayment() {
-            const customAmount = document.getElementById('customAmount').value;
+            const customAmountInput = document.getElementById('customAmount');
+            const customAmount = customAmountInput.value;
             const amount = customAmount ? parseFloat(customAmount) : selectedAmount;
             
             if (amount && amount > 0) {
+                alert(`Пополнение баланса на ${amount} ₽ успешно!`);
                 hideTopUpModal();
-                showLoginModal();
+                
+                const balanceElement = document.getElementById('balance');
+                const currentBalance = parseInt(balanceElement.textContent);
+                if (!isNaN(currentBalance)) {
+                    balanceElement.textContent = (currentBalance + amount) + ' ₽';
+                }
             } else {
                 alert('Пожалуйста, выберите или введите сумму для пополнения');
             }
@@ -905,14 +1080,30 @@
                 createStars();
                 createSubtleConfetti();
                 
+                window.addEventListener('resize', handleResize);
+                
             } catch (e) {
                 console.log('Telegram WebApp init error:', e);
                 updateUserUI(null);
             }
         }
         
+        function handleResize() {
+            const width = window.innerWidth;
+            
+            if (width < 364) {
+                const userName = document.getElementById('userName');
+                if (userName.textContent.length > 10) {
+                    userName.style.fontSize = '13px';
+                }
+            }
+        }
+        
         function createParticles() {
             const container = document.getElementById('particles');
+            if (!container) return;
+            
+            container.innerHTML = '';
             for (let i = 0; i < 15; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
@@ -927,6 +1118,9 @@
         
         function createStars() {
             const container = document.getElementById('stars');
+            if (!container) return;
+            
+            container.innerHTML = '';
             for (let i = 0; i < 40; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
@@ -939,6 +1133,9 @@
         
         function createSubtleConfetti() {
             const container = document.getElementById('confetti');
+            if (!container) return;
+            
+            container.innerHTML = '';
             const colors = ['rgba(99, 102, 241, 0.2)', 'rgba(139, 92, 246, 0.15)', 'rgba(59, 130, 246, 0.1)'];
             
             for (let i = 0; i < 15; i++) {
@@ -959,6 +1156,16 @@
             if (e.key === 'Escape') {
                 hideLoginModal();
                 hideTopUpModal();
+            }
+        });
+        
+        document.getElementById('customAmount')?.addEventListener('input', function(e) {
+            const value = parseFloat(this.value);
+            if (value > 0) {
+                selectedAmount = value;
+                document.querySelectorAll('.amount-btn').forEach(btn => {
+                    btn.classList.remove('bg-indigo-600/30', 'border', 'border-indigo-500');
+                });
             }
         });
         
