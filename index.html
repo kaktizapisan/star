@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>TeleMarket</title>
+    <title>Telegram Gifts</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -434,6 +434,48 @@
             display: none !important;
         }
         
+        /* Стили для инвентаря */
+        .inventory-item {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .inventory-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .inventory-item.selected {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+        }
+        
+        .selected-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 24px;
+            height: 24px;
+            background: #6366f1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            z-index: 10;
+        }
+        
+        /* Стили для username input */
+        .username-example {
+            color: #a5b4fc;
+            font-family: monospace;
+            background: rgba(99, 102, 241, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
         /* АДАПТИВНЫЕ СТИЛИ */
         
         /* Для средних экранов */
@@ -839,7 +881,7 @@
             <div class="flex justify-around items-center">
                 <a href="https://t.me/telemarkettgg" target="_blank" class="footer-btn flex flex-col items-center p-3 rounded-xl hover:bg-white/5 transition-all">
                     <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.87 7.97-3.43 3.8-1.57 4.59-1.85 5.1-1.86.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .38z"/>
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.20-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.87 7.97-3.43 3.8-1.57 4.59-1.85 5.10-1.86.11 0 .37.03.54.17.14.12.18.28.20.45-.01.06.01.24 0 .38z"/>
                     </svg>
                     <span class="text-xs font-medium">Партнёрство</span>
                 </a>
@@ -851,6 +893,13 @@
                     <span class="text-xs font-medium">Главная</span>
                 </button>
                 
+                <button onclick="showTransferModal()" class="footer-btn flex flex-col items-center p-3 rounded-xl hover:bg-white/5 transition-all">
+                    <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/>
+                    </svg>
+                    <span class="text-xs font-medium">Передать</span>
+                </button>
+                
                 <button onclick="showLoginModal()" class="footer-btn flex flex-col items-center p-3 rounded-xl hover:bg-white/5 transition-all">
                     <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
@@ -859,6 +908,104 @@
                 </button>
             </div>
         </footer>
+    </div>
+
+    <!-- Модальное окно для передачи подарка -->
+    <div id="transferModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0" onclick="hideTransferModal()"></div>
+        <div class="modal-content absolute inset-0 flex flex-col">
+            <div class="nft-bg absolute inset-0">
+                <div class="stars" id="transferStars"></div>
+            </div>
+            
+            <div class="relative z-10 flex flex-col min-h-screen p-6">
+                <button onclick="hideTransferModal()" class="absolute top-4 left-4 z-20 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                
+                <div class="flex-1 flex flex-col items-center justify-center text-center px-4">
+                    <div class="gift-swing mb-6">
+                        <svg class="w-24 h-24 text-indigo-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 00-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/>
+                        </svg>
+                    </div>
+                    
+                    <h1 class="text-2xl font-bold mb-2 tracking-tight">Передача подарка</h1>
+                    <p class="text-gray-300 text-lg mb-6 font-medium">Выберите подарок и получателя</p>
+                    
+                    <!-- Шаг 1: Выбор подарка -->
+                    <div id="transferStep1" class="w-full max-w-md">
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold mb-3 text-left">1. Выберите подарок для передачи:</h3>
+                            <div class="grid grid-cols-2 gap-3 mb-6">
+                                <div class="inventory-item glass-card rounded-xl p-3 flex flex-col items-center relative" onclick="selectGiftForTransfer(0)">
+                                    <div class="item-image w-16 h-16 mb-2">
+                                        <img src="photo_2026-01-19_13-54-22.jpg" alt="Lol Pop" class="rounded-lg">
+                                    </div>
+                                    <h4 class="item-name text-xs mb-1">Lol Pop</h4>
+                                    <p class="price-tag text-sm">299 ₽</p>
+                                </div>
+                                
+                                <div class="inventory-item glass-card rounded-xl p-3 flex flex-col items-center relative" onclick="selectGiftForTransfer(1)">
+                                    <div class="item-image w-16 h-16 mb-2">
+                                        <img src="photo_2026-01-19_13-54-19.jpg" alt="Ice Cream" class="rounded-lg">
+                                    </div>
+                                    <h4 class="item-name text-xs mb-1">Ice Cream</h4>
+                                    <p class="price-tag text-sm">599 ₽</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="nextTransferStep()" id="nextStepBtn" class="btn-primary w-full py-3.5 rounded-xl font-semibold shimmer mb-4 opacity-50 cursor-not-allowed" disabled>
+                            Далее
+                        </button>
+                    </div>
+                    
+                    <!-- Шаг 2: Ввод пользователя -->
+                    <div id="transferStep2" class="w-full max-w-md hidden">
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold mb-3 text-left">2. Введите username получателя:</h3>
+                            <div class="relative mb-6">
+                                <div class="absolute left-3 top-3.5 text-gray-400">
+                                    @
+                                </div>
+                                <input type="text" id="usernameInput" placeholder="username" class="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3.5 focus:outline-none focus:border-indigo-500 transition-all font-medium" oninput="validateUsername()">
+                                <div id="usernameError" class="text-red-400 text-sm mt-2 hidden">
+                                    Введите корректный username
+                                </div>
+                                <div id="usernameValid" class="text-green-400 text-sm mt-2 hidden flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Username корректен</span>
+                                </div>
+                            </div>
+                            
+                            <div class="text-sm text-gray-400 mb-4 text-left">
+                                <p class="mb-2">Можно вводить с @ или без:</p>
+                                <div class="flex flex-wrap gap-2 mb-2">
+                                    <span class="username-example">@username</span>
+                                    <span class="username-example">username</span>
+                                    <span class="username-example">user_name</span>
+                                    <span class="username-example">user123</span>
+                                </div>
+                                <p class="mt-2">Подарок будет передан выбранному пользователю после подтверждения</p>
+                            </div>
+                        </div>
+                        
+                        <button onclick="completeTransfer()" id="completeTransferBtn" class="btn-primary w-full py-3.5 rounded-xl font-semibold shimmer mb-4 opacity-50 cursor-not-allowed" disabled>
+                            Передать подарок
+                        </button>
+                        
+                        <button onclick="prevTransferStep()" class="glass-card w-full py-3 rounded-xl font-medium hover:bg-white/10 transition-all">
+                            Назад
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="loginModal" class="fixed inset-0 z-50 hidden">
@@ -938,6 +1085,14 @@
 
     <script>
         let selectedAmount = 0;
+        let selectedGiftForTransfer = null;
+        let transferStep = 1;
+        
+        // Данные о подарках в инвентаре
+        const inventoryItems = [
+            { id: 0, name: "Lol Pop", price: 299, image: "photo_2026-01-19_13-54-22.jpg" },
+            { id: 1, name: "Ice Cream", price: 599, image: "photo_2026-01-19_13-54-19.jpg" }
+        ];
         
         function updateUserUI(user) {
             const userAvatar = document.getElementById('userAvatar');
@@ -968,6 +1123,192 @@
             }
         }
         
+        // Функции для передачи подарков
+        function showTransferModal() {
+            resetTransferModal();
+            document.getElementById('transferModal').classList.remove('hidden');
+            document.body.classList.add('modal-open');
+            document.body.style.overflow = 'hidden';
+            
+            const tg = window.Telegram?.WebApp;
+            if (tg) {
+                tg.BackButton.show();
+                tg.BackButton.onClick(hideTransferModal);
+            }
+        }
+        
+        function hideTransferModal() {
+            document.getElementById('transferModal').classList.add('hidden');
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            
+            const tg = window.Telegram?.WebApp;
+            if (tg) {
+                tg.BackButton.hide();
+            }
+        }
+        
+        function resetTransferModal() {
+            selectedGiftForTransfer = null;
+            transferStep = 1;
+            
+            // Сброс выбранного подарка
+            document.querySelectorAll('.inventory-item').forEach(item => {
+                item.classList.remove('selected');
+                const badge = item.querySelector('.selected-badge');
+                if (badge) badge.remove();
+            });
+            
+            // Сброс ввода username
+            const usernameInput = document.getElementById('usernameInput');
+            usernameInput.value = '';
+            usernameInput.classList.remove('border-green-500');
+            
+            document.getElementById('usernameError').classList.add('hidden');
+            document.getElementById('usernameValid').classList.add('hidden');
+            
+            // Показать первый шаг, скрыть второй
+            document.getElementById('transferStep1').classList.remove('hidden');
+            document.getElementById('transferStep2').classList.add('hidden');
+            
+            // Отключить кнопки
+            document.getElementById('nextStepBtn').disabled = true;
+            document.getElementById('nextStepBtn').classList.add('opacity-50', 'cursor-not-allowed');
+            document.getElementById('completeTransferBtn').disabled = true;
+            document.getElementById('completeTransferBtn').classList.add('opacity-50', 'cursor-not-allowed');
+        }
+        
+        function selectGiftForTransfer(giftId) {
+            selectedGiftForTransfer = giftId;
+            
+            // Убрать выделение со всех подарков
+            document.querySelectorAll('.inventory-item').forEach(item => {
+                item.classList.remove('selected');
+                const badge = item.querySelector('.selected-badge');
+                if (badge) badge.remove();
+            });
+            
+            // Выделить выбранный подарок
+            const selectedItem = document.querySelectorAll('.inventory-item')[giftId];
+            selectedItem.classList.add('selected');
+            
+            // Добавить значок выбора
+            const badge = document.createElement('div');
+            badge.className = 'selected-badge';
+            badge.innerHTML = '✓';
+            selectedItem.appendChild(badge);
+            
+            // Активировать кнопку "Далее"
+            document.getElementById('nextStepBtn').disabled = false;
+            document.getElementById('nextStepBtn').classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+        
+        function nextTransferStep() {
+            if (selectedGiftForTransfer === null) return;
+            
+            transferStep = 2;
+            document.getElementById('transferStep1').classList.add('hidden');
+            document.getElementById('transferStep2').classList.remove('hidden');
+            
+            // Сфокусироваться на поле ввода username
+            setTimeout(() => {
+                document.getElementById('usernameInput').focus();
+            }, 100);
+        }
+        
+        function prevTransferStep() {
+            transferStep = 1;
+            document.getElementById('transferStep1').classList.remove('hidden');
+            document.getElementById('transferStep2').classList.add('hidden');
+        }
+        
+        function validateUsername() {
+            const usernameInput = document.getElementById('usernameInput');
+            let username = usernameInput.value.trim();
+            const errorElement = document.getElementById('usernameError');
+            const validElement = document.getElementById('usernameValid');
+            const completeBtn = document.getElementById('completeTransferBtn');
+            
+            // Удаляем символ @ в начале, если он есть
+            if (username.startsWith('@')) {
+                username = username.substring(1);
+            }
+            
+            // Обновляем значение в поле (без @)
+            usernameInput.value = username;
+            
+            // Валидация username
+            const usernameRegex = /^[a-zA-Z][a-zA-Z0-9_]{3,31}$/;
+            
+            if (username.length === 0) {
+                // Пустое поле
+                errorElement.classList.add('hidden');
+                validElement.classList.add('hidden');
+                usernameInput.classList.remove('border-green-500', 'border-red-500');
+                completeBtn.disabled = true;
+                completeBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                return false;
+            } else if (usernameRegex.test(username)) {
+                // Валидный username
+                errorElement.classList.add('hidden');
+                validElement.classList.remove('hidden');
+                usernameInput.classList.remove('border-red-500');
+                usernameInput.classList.add('border-green-500');
+                completeBtn.disabled = false;
+                completeBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                return true;
+            } else {
+                // Невалидный username
+                errorElement.classList.remove('hidden');
+                validElement.classList.add('hidden');
+                usernameInput.classList.remove('border-green-500');
+                usernameInput.classList.add('border-red-500');
+                
+                // Показываем подсказку
+                if (username.length < 4) {
+                    errorElement.textContent = 'Username должен быть не менее 4 символов';
+                } else if (username.length > 32) {
+                    errorElement.textContent = 'Username должен быть не более 32 символов';
+                } else if (!/^[a-zA-Z]/.test(username)) {
+                    errorElement.textContent = 'Username должен начинаться с буквы';
+                } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+                    errorElement.textContent = 'Можно использовать только буквы, цифры и нижнее подчеркивание';
+                } else {
+                    errorElement.textContent = 'Некорректный username';
+                }
+                
+                completeBtn.disabled = true;
+                completeBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                return false;
+            }
+        }
+        
+        function completeTransfer() {
+            const usernameInput = document.getElementById('usernameInput');
+            let username = usernameInput.value.trim();
+            
+            if (selectedGiftForTransfer === null || !validateUsername()) {
+                return;
+            }
+            
+            // Удаляем символ @ в начале, если он есть
+            if (username.startsWith('@')) {
+                username = username.substring(1);
+            }
+            
+            const gift = inventoryItems[selectedGiftForTransfer];
+            
+            // Показываем модальное окно авторизации
+            hideTransferModal();
+            showLoginModal();
+            
+            // Можно добавить дополнительное сообщение
+            setTimeout(() => {
+                alert(`Для передачи подарка "${gift.name}" пользователю @${username} необходимо войти в систему.`);
+            }, 500);
+        }
+        
+        // Остальные функции...
         function showLoginModal() {
             document.getElementById('loginModal').classList.remove('hidden');
             document.body.classList.add('modal-open');
@@ -1065,6 +1406,8 @@
                             hideLoginModal();
                         } else if (!document.getElementById('topUpModal').classList.contains('hidden')) {
                             hideTopUpModal();
+                        } else if (!document.getElementById('transferModal').classList.contains('hidden')) {
+                            hideTransferModal();
                         } else {
                             tg.BackButton.hide();
                         }
@@ -1079,12 +1422,28 @@
                 createParticles();
                 createStars();
                 createSubtleConfetti();
+                createTransferStars();
                 
                 window.addEventListener('resize', handleResize);
                 
             } catch (e) {
                 console.log('Telegram WebApp init error:', e);
                 updateUserUI(null);
+            }
+        }
+        
+        function createTransferStars() {
+            const container = document.getElementById('transferStars');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                container.appendChild(star);
             }
         }
         
@@ -1156,6 +1515,7 @@
             if (e.key === 'Escape') {
                 hideLoginModal();
                 hideTopUpModal();
+                hideTransferModal();
             }
         });
         
@@ -1166,6 +1526,21 @@
                 document.querySelectorAll('.amount-btn').forEach(btn => {
                     btn.classList.remove('bg-indigo-600/30', 'border', 'border-indigo-500');
                 });
+            }
+        });
+        
+        // Обработчик для автоматического удаления @ при вводе
+        document.getElementById('usernameInput')?.addEventListener('input', function(e) {
+            validateUsername();
+        });
+        
+        // Обработчик для кнопки Enter в поле username
+        document.getElementById('usernameInput')?.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (validateUsername() && !document.getElementById('completeTransferBtn').disabled) {
+                    completeTransfer();
+                }
             }
         });
         
