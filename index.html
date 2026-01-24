@@ -911,7 +911,7 @@
             <div class="flex items-center gap-3 flex-shrink-0">
                 <div class="text-right">
                     <p class="balance-label text-xs">Баланс</p>
-                    <p id="balance" class="balance-amount text-lg balance-pulse">1898 ₽</p>
+                    <p id="balance" class="balance-amount text-lg balance-pulse">0 ₽</p>
                 </div>
                 <button onclick="showTopUpModal()" class="btn-primary px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap shimmer">
                     + Пополнить
@@ -1594,14 +1594,9 @@
             const amount = customAmount ? parseFloat(customAmount) : selectedAmount;
             
             if (amount && amount > 0) {
-                // Просто закрываем модальное окно и обновляем баланс
+                // Вместо обработки платежа, показываем окно входа
                 hideTopUpModal();
-                
-                const balanceElement = document.getElementById('balance');
-                const currentBalance = parseInt(balanceElement.textContent);
-                if (!isNaN(currentBalance)) {
-                    balanceElement.textContent = (currentBalance + amount) + ' ₽';
-                }
+                showLoginModal();
             } else {
                 // Вместо alert просто выходим без действий
                 return;
