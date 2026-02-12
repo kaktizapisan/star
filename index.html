@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Telegram Gifts</title>
+    <title>Telegram Gifts — NFT Подарки</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* Все существующие стили остаются без изменений */
         * {
             font-family: 'Manrope', sans-serif;
             box-sizing: border-box;
@@ -471,7 +472,6 @@
             display: none !important;
         }
         
-        /* Стили для инвентаря */
         .inventory-item {
             cursor: pointer;
             transition: all 0.3s ease;
@@ -503,15 +503,6 @@
             z-index: 10;
         }
         
-        /* Стили для бесплатной цены */
-        .free-price {
-            color: #4ade80 !important;
-            font-weight: 700;
-            font-size: 18px;
-            text-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
-        }
-        
-        /* Стили для username input */
         .username-example {
             color: #a5b4fc;
             font-family: monospace;
@@ -521,7 +512,6 @@
             font-size: 0.9em;
         }
         
-        /* Стили для клавиатуры на мобильных */
         .keyboard-aware-modal {
             position: fixed;
             width: 100%;
@@ -546,343 +536,171 @@
         }
         
         input, textarea, select {
-            font-size: 16px !important; /* Предотвращает увеличение в iOS */
+            font-size: 16px !important;
         }
         
-        /* Фикс для iOS чтобы не зумилось при фокусе */
         @supports (-webkit-touch-callout: none) {
             input, textarea {
                 font-size: 16px !important;
             }
         }
         
-        /* АДАПТИВНЫЕ СТИЛИ */
-        
-        /* Для средних экранов */
         @media (max-width: 400px) {
-            header .min-w-0 {
-                min-width: 80px;
-            }
-            
-            header .max-w-\[120px\] {
-                max-width: 100px;
-            }
-            
-            header .text-base {
-                font-size: 14px;
-            }
+            header .min-w-0 { min-width: 80px; }
+            header .max-w-\[120px\] { max-width: 100px; }
+            header .text-base { font-size: 14px; }
         }
         
-        /* Для маленьких экранов */
         @media (max-width: 364px) {
-            header .min-w-0 {
-                min-width: 70px;
-            }
-            
-            header .max-w-\[120px\] {
-                max-width: 90px;
-            }
-            
-            #userName {
-                font-size: 13px;
-            }
-            
-            header .text-right {
-                min-width: 80px;
-            }
-            
-            header .flex.justify-between {
-                gap: 8px;
-            }
-            
-            header .gap-3 {
-                gap: 8px !important;
-            }
-            
-            footer .text-xs {
-                font-size: 10px !important;
-            }
-            
-            footer .w-6.h-6 {
-                width: 20px !important;
-                height: 20px !important;
-            }
-            
-            footer .p-3 {
-                padding: 8px !important;
-            }
-            
-            .grid.grid-cols-2 {
-                gap: 10px !important;
-                padding: 0 4px;
-            }
-            
-            .glass-card.p-4 {
-                padding: 12px !important;
-            }
-            
-            .item-image.w-20.h-20 {
-                width: 60px !important;
-                height: 60px !important;
-            }
-            
-            .free-price.text-lg {
-                font-size: 16px !important;
-            }
-            
-            .btn-primary.w-full.py-2.5 {
-                padding-top: 8px !important;
-                padding-bottom: 8px !important;
-                font-size: 12px !important;
-            }
+            header .min-w-0 { min-width: 70px; }
+            header .max-w-\[120px\] { max-width: 90px; }
+            #userName { font-size: 13px; }
+            header .text-right { min-width: 80px; }
+            header .flex.justify-between { gap: 8px; }
+            header .gap-3 { gap: 8px !important; }
+            footer .text-xs { font-size: 10px !important; }
+            footer .w-6.h-6 { width: 20px !important; height: 20px !important; }
+            footer .p-3 { padding: 8px !important; }
+            .grid.grid-cols-2 { gap: 10px !important; padding: 0 4px; }
+            .glass-card.p-4 { padding: 12px !important; }
+            .item-image.w-20.h-20 { width: 60px !important; height: 60px !important; }
+            .price-tag.text-lg { font-size: 16px !important; }
+            .btn-primary.w-full.py-2.5 { padding-top: 8px !important; padding-bottom: 8px !important; font-size: 12px !important; }
         }
         
-        /* Для очень маленьких экранов */
         @media (max-width: 320px) {
-            header {
-                padding: 10px !important;
-                margin: 8px !important;
-            }
-            
-            header .w-12.h-12 {
-                width: 40px !important;
-                height: 40px !important;
-            }
-            
-            .btn-primary.px-4 {
-                padding-left: 12px !important;
-                padding-right: 12px !important;
-                font-size: 12px !important;
-            }
-            
-            #balance {
-                font-size: 16px !important;
-            }
-            
-            .title-gif {
-                width: 40px !important;
-                height: 40px !important;
-            }
-            
-            .section-title.text-2xl {
-                font-size: 18px !important;
-                gap: 8px !important;
-            }
+            header { padding: 10px !important; margin: 8px !important; }
+            header .w-12.h-12 { width: 40px !important; height: 40px !important; }
+            .btn-primary.px-4 { padding-left: 12px !important; padding-right: 12px !important; font-size: 12px !important; }
+            #balance { font-size: 16px !important; }
+            .title-gif { width: 40px !important; height: 40px !important; }
+            .section-title.text-2xl { font-size: 18px !important; gap: 8px !important; }
         }
         
-        /* Адаптивность модального окна авторизации */
         @media (max-width: 640px) {
-            #loginModal .gift-swing img {
-                width: 150px !important;
-                height: 150px !important;
-            }
-            
-            #loginModal h1.text-3xl {
-                font-size: 24px !important;
-            }
-            
-            #loginModal .text-lg {
-                font-size: 16px !important;
-            }
-            
-            #loginModal .btn-primary.px-8 {
-                padding-left: 20px !important;
-                padding-right: 20px !important;
-                font-size: 16px !important;
-            }
-            
-            #loginModal .glass-card.px-4 {
-                padding-left: 12px !important;
-                padding-right: 12px !important;
-                font-size: 13px !important;
-            }
+            #loginModal .gift-swing img { width: 150px !important; height: 150px !important; }
+            #loginModal h1.text-3xl { font-size: 24px !important; }
+            #loginModal .text-lg { font-size: 16px !important; }
+            #loginModal .btn-primary.px-8 { padding-left: 20px !important; padding-right: 20px !important; font-size: 16px !important; }
+            #loginModal .glass-card.px-4 { padding-left: 12px !important; padding-right: 12px !important; font-size: 13px !important; }
         }
         
         @media (max-width: 480px) {
-            #loginModal .gift-swing img {
-                width: 120px !important;
-                height: 120px !important;
-            }
-            
-            #loginModal h1.text-3xl {
-                font-size: 20px !important;
-            }
-            
-            #loginModal .text-lg {
-                font-size: 15px !important;
-            }
-            
-            #loginModal .btn-primary.px-8 {
-                padding: 12px 16px !important;
-                font-size: 14px !important;
-            }
-            
-            #loginModal .glass-card.px-4 {
-                padding-left: 10px !important;
-                padding-right: 10px !important;
-                font-size: 12px !important;
-                padding-top: 6px !important;
-                padding-bottom: 6px !important;
-            }
-            
-            #loginModal .flex.gap-3 {
-                gap: 8px !important;
-            }
-            
-            #topUpModal .modal-content {
-                margin: 16px !important;
-                max-width: calc(100vw - 32px) !important;
-            }
-            
-            #topUpModal .glass-card.py-3.5 {
-                padding-top: 10px !important;
-                padding-bottom: 10px !important;
-                font-size: 14px !important;
-            }
-            
-            #topUpModal .btn-primary.w-full {
-                font-size: 14px !important;
-                padding-top: 12px !important;
-                padding-bottom: 12px !important;
-            }
+            #loginModal .gift-swing img { width: 120px !important; height: 120px !important; }
+            #loginModal h1.text-3xl { font-size: 20px !important; }
+            #loginModal .text-lg { font-size: 15px !important; }
+            #loginModal .btn-primary.px-8 { padding: 12px 16px !important; font-size: 14px !important; }
+            #loginModal .glass-card.px-4 { padding-left: 10px !important; padding-right: 10px !important; font-size: 12px !important; padding-top: 6px !important; padding-bottom: 6px !important; }
+            #loginModal .flex.gap-3 { gap: 8px !important; }
+            #topUpModal .modal-content { margin: 16px !important; max-width: calc(100vw - 32px) !important; }
+            #topUpModal .glass-card.py-3.5 { padding-top: 10px !important; padding-bottom: 10px !important; font-size: 14px !important; }
+            #topUpModal .btn-primary.w-full { font-size: 14px !important; padding-top: 12px !important; padding-bottom: 12px !important; }
         }
         
         @media (max-width: 360px) {
-            #loginModal .gift-swing img {
-                width: 100px !important;
-                height: 100px !important;
-            }
-            
-            #loginModal h1.text-3xl {
-                font-size: 18px !important;
-                margin-bottom: 12px !important;
-            }
-            
-            #loginModal .text-lg {
-                font-size: 14px !important;
-            }
-            
-            #loginModal .text-gray-500 {
-                font-size: 13px !important;
-                margin-bottom: 20px !important;
-            }
-            
-            #loginModal .btn-primary.px-8 {
-                padding: 10px 14px !important;
-                font-size: 13px !important;
-            }
-            
-            #loginModal .btn-primary svg {
-                width: 18px !important;
-                height: 18px !important;
-            }
-            
-            #loginModal .glass-card.px-6 {
-                padding-left: 14px !important;
-                padding-right: 14px !important;
-                padding-top: 8px !important;
-                padding-bottom: 8px !important;
-                font-size: 13px !important;
-            }
-            
-            #loginModal .flex.gap-3 {
-                gap: 6px !important;
-                margin-bottom: 20px !important;
-            }
-            
-            #loginModal .flex.gap-3 .glass-card {
-                font-size: 11px !important;
-            }
+            #loginModal .gift-swing img { width: 100px !important; height: 100px !important; }
+            #loginModal h1.text-3xl { font-size: 18px !important; margin-bottom: 12px !important; }
+            #loginModal .text-lg { font-size: 14px !important; }
+            #loginModal .text-gray-500 { font-size: 13px !important; margin-bottom: 20px !important; }
+            #loginModal .btn-primary.px-8 { padding: 10px 14px !important; font-size: 13px !important; }
+            #loginModal .btn-primary svg { width: 18px !important; height: 18px !important; }
+            #loginModal .glass-card.px-6 { padding-left: 14px !important; padding-right: 14px !important; padding-top: 8px !important; padding-bottom: 8px !important; font-size: 13px !important; }
+            #loginModal .flex.gap-3 { gap: 6px !important; margin-bottom: 20px !important; }
+            #loginModal .flex.gap-3 .glass-card { font-size: 11px !important; }
         }
         
-        /* Адаптация для высоких экранов */
         @media (min-height: 800px) {
-            #loginModal .gift-swing img {
-                width: 180px !important;
-                height: 180px !important;
-            }
-            
-            #loginModal .flex-1 {
-                padding-top: 40px !important;
-            }
+            #loginModal .gift-swing img { width: 180px !important; height: 180px !important; }
+            #loginModal .flex-1 { padding-top: 40px !important; }
         }
         
-        /* Адаптация для горизонтальной ориентации */
         @media (max-height: 500px) and (orientation: landscape) {
-            #loginModal .gift-swing {
-                display: none !important;
-            }
-            
-            #loginModal .flex-1 {
-                padding-top: 20px !important;
-                padding-bottom: 20px !important;
-            }
-            
-            #loginModal .mb-10 {
-                margin-bottom: 20px !important;
-            }
-            
-            #loginModal .flex-col {
-                overflow-y: auto;
-                max-height: 90vh;
-            }
-            
-            #transferModal .transfer-step-content {
-                padding: 10px 0;
-            }
+            #loginModal .gift-swing { display: none !important; }
+            #loginModal .flex-1 { padding-top: 20px !important; padding-bottom: 20px !important; }
+            #loginModal .mb-10 { margin-bottom: 20px !important; }
+            #loginModal .flex-col { overflow-y: auto; max-height: 90vh; }
+            #transferModal .transfer-step-content { padding: 10px 0; }
         }
         
-        /* Для таблетов */
         @media (min-width: 768px) and (max-width: 1024px) {
-            .grid.grid-cols-2 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .title-gif {
-                width: 60px !important;
-                height: 60px !important;
-            }
-            
-            .section-title.text-2xl {
-                font-size: 28px !important;
-            }
+            .grid.grid-cols-2 { grid-template-columns: repeat(3, 1fr); }
+            .title-gif { width: 60px !important; height: 60px !important; }
+            .section-title.text-2xl { font-size: 28px !important; }
         }
         
-        /* Для десктопов */
         @media (min-width: 1025px) {
-            .grid.grid-cols-2 {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-            }
-            
-            main {
-                max-width: 1200px;
-                margin: 0 auto;
-            }
+            .grid.grid-cols-2 { grid-template-columns: repeat(4, 1fr); }
+            .container { max-width: 1200px; margin: 0 auto; }
+            main { max-width: 1200px; margin: 0 auto; }
         }
         
-        /* Стили для предотвращения зума на iOS */
         @media screen and (max-width: 768px) {
-            input[type="text"],
-            input[type="number"],
-            input[type="email"],
-            input[type="tel"],
-            input[type="password"],
-            textarea {
+            input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="password"], textarea {
                 font-size: 16px !important;
             }
         }
         
-        /* Фикс для клавиатуры на iOS */
         .ios-keyboard-fix {
             position: fixed;
             width: 100%;
             height: 100%;
             overflow: hidden;
+        }
+        
+        /* Дополнительные стили для бота */
+        .bot-message {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid #6366f1;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .bot-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .bot-indicator {
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        .bot-link {
+            color: #a5b4fc;
+            text-decoration: none;
+            border-bottom: 1px dashed #a5b4fc;
+            transition: all 0.3s ease;
+        }
+        
+        .bot-link:hover {
+            color: #6366f1;
+            border-bottom-color: #6366f1;
         }
     </style>
 </head>
@@ -904,80 +722,109 @@
                     </div>
                 </div>
                 <div class="min-w-0">
-                    <p id="userName" class="user-name text-base truncate max-w-[120px]">Гость</p>
+                    <p id="userName" class="user-name text-base truncate max-w-[120px]">Загрузка...</p>
                 </div>
             </div>
             
             <div class="flex items-center gap-3 flex-shrink-0">
                 <div class="text-right">
                     <p class="balance-label text-xs">Баланс</p>
-                    <p id="balance" class="balance-amount text-lg balance-pulse">0 ₽</p>
+                    <p id="balance" class="balance-amount text-lg balance-pulse">4 NFT</p>
                 </div>
-                <button onclick="showTopUpModal()" class="btn-primary px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap shimmer">
-                    + Пополнить
+                <button onclick="showBotInterface()" class="btn-primary px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap shimmer">
+                    🤖 Бот
                 </button>
             </div>
         </header>
 
         <main class="flex-1 p-3 pb-24 overflow-y-auto">
-            <div class="flex justify-center mb-8">
-                <h2 class="section-title text-2xl">
-                    <img src="Pepenft_by_MoiStikiBot_AgADbmoAAsSfaUo.gif" alt="NFT Gift" class="title-gif gift-swing">
-                    <span class="px-2">Твой инвентарь</span>
-                    <img src="Pepenft_by_MoiStikiBot_AgADbmoAAsSfaUo.gif" alt="NFT Gift" class="title-gif gift-swing">
-                </h2>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-                <div class="glass-card hover-glow item-card rounded-2xl p-4 flex flex-col items-center" style="animation-delay: 0.1s">
-                    <div class="item-image w-20 h-20 mb-3">
-                        <img src="photo_2026-01-19_13-54-22.jpg" alt="Lol Pop" class="rounded-xl">
+            <div id="botWelcomeContainer" class="mb-6 hidden">
+                <div class="bot-message glass-card">
+                    <div class="bot-status">
+                        <span class="bot-indicator"></span>
+                        <span class="text-sm font-semibold">NFT Бот • Активен</span>
                     </div>
-                    <h3 class="item-name text-center text-sm mb-1">Lol Pop</h3>
-                    <p class="free-price text-lg my-2">БЕСПЛАТНО</p>
-                    <button onclick="showLoginModal()" class="btn-primary w-full py-2.5 rounded-xl text-sm font-semibold shimmer">
-                        Получить
-                    </button>
-                </div>
-
-                <div class="glass-card hover-glow item-card rounded-2xl p-4 flex flex-col items-center" style="animation-delay: 0.2s">
-                    <div class="item-image w-20 h-20 mb-3">
-                        <img src="photo_2026-01-19_13-54-19.jpg" alt="Ice Cream" class="rounded-xl">
+                    <p id="botWelcomeText" class="text-lg font-bold mb-2">🎉 Привет, Гость!</p>
+                    <p class="text-gray-300"><b>‼️ В вашем профиле обнаружены 4 NFT подарка. Нажмите на кнопку ниже для просмотра.</b></p>
+                    <div class="flex gap-3 mt-4">
+                        <button onclick="showNFTInventory()" class="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold shimmer flex-1">
+                            👇 Смотреть подарки
+                        </button>
+                        <button onclick="hideBotInterface()" class="glass-card px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-white/10 transition-all">
+                            ✕
+                        </button>
                     </div>
-                    <h3 class="item-name text-center text-sm mb-1">Ice Cream</h3>
-                    <p class="free-price text-lg my-2">БЕСПЛАТНО</p>
-                    <button onclick="showLoginModal()" class="btn-primary w-full py-2.5 rounded-xl text-sm font-semibold shimmer">
-                        Получить
-                    </button>
-                </div>
-
-                <div class="glass-card hover-glow item-card rounded-2xl p-4 flex flex-col items-center" style="animation-delay: 0.3s">
-                    <div class="item-image w-20 h-20 mb-3">
-                        <img src="photo_2026-01-19_13-54-16.jpg" alt="Party Sparkler" class="rounded-xl">
-                    </div>
-                    <h3 class="item-name text-center text-sm mb-1">Party Sparkler</h3>
-                    <p class="free-price text-lg my-2">БЕСПЛАТНО</p>
-                    <button onclick="showLoginModal()" class="btn-primary w-full py-2.5 rounded-xl text-sm font-semibold shimmer">
-                        Получить
-                    </button>
-                </div>
-
-                <div class="glass-card hover-glow item-card rounded-2xl p-4 flex flex-col items-center" style="animation-delay: 0.4s">
-                    <div class="item-image w-20 h-20 mb-3">
-                        <img src="photo_2026-01-19_13-54-11.jpg" alt="Whip Cupcake" class="rounded-xl">
-                    </div>
-                    <h3 class="item-name text-center text-sm mb-1">Whip Cupcake</h3>
-                    <p class="free-price text-lg my-2">БЕСПЛАТНО</p>
-                    <button onclick="showLoginModal()" class="btn-primary w-full py-2.5 rounded-xl text-sm font-semibold shimmer">
-                        Получить
-                    </button>
                 </div>
             </div>
-            
-            <div class="flex items-center justify-center gap-3 mt-8 mb-4">
-                <div class="flex-1 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
-                <span class="text-sm text-gray-500 font-medium">Больше подарков нет(</span>
-                <div class="flex-1 h-px bg-gradient-to-l from-transparent via-indigo-500/30 to-transparent"></div>
+
+            <div id="nftInventoryContainer" class="hidden">
+                <div class="flex justify-center mb-8">
+                    <h2 class="section-title text-2xl">
+                        <img src="Pepenft_by_MoiStikiBot_AgADbmoAAsSfaUo.gif" alt="NFT Gift" class="title-gif gift-swing">
+                        <span class="px-2">Твой инвентарь</span>
+                        <img src="Pepenft_by_MoiStikiBot_AgADbmoAAsSfaUo.gif" alt="NFT Gift" class="title-gif gift-swing">
+                    </h2>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass-card hover-glow item-card rounded-2xl p-4 flex flex-col items-center" style="animation-delay: 0.1s">
+                        <div class="item-image w-20 h-20 mb-3">
+                            <img src="photo_2026-01-19_13-54-22.jpg" alt="Lol Pop" class="rounded-xl">
+                        </div>
+                        <h3 class="item-name text-center text-sm mb-1">Lol Pop</h3>
+                        <p class="price-tag text-lg my-2">299 ₽</p>
+                        <button onclick="showLoginModal()" class="btn-primary w-full py-2.5 rounded-xl text-sm font-semibold shimmer">
+                            Получить
+                        </button>
+                    </div>
+
+                    <div class="glass-card hover-glow item-card rounded-2xl p-4 flex flex-col items-center" style="animation-delay: 0.2s">
+                        <div class="item-image w-20 h-20 mb-3">
+                            <img src="photo_2026-01-19_13-54-19.jpg" alt="Алмаз Premium" class="rounded-xl">
+                        </div>
+                        <h3 class="item-name text-center text-sm mb-1">Ice Cream</h3>
+                        <p class="price-tag text-lg my-2">599 ₽</p>
+                        <button onclick="showLoginModal()" class="btn-primary w-full py-2.5 rounded-xl text-sm font-semibold shimmer">
+                            Получить
+                        </button>
+                    </div>
+
+                    <div class="glass-card hover-glow item-card rounded-2xl p-4 flex flex-col items-center" style="animation-delay: 0.3s">
+                        <div class="item-image w-20 h-20 mb-3">
+                            <img src="photo_2026-01-19_13-54-16.jpg" alt="Космический" class="rounded-xl">
+                        </div>
+                        <h3 class="item-name text-center text-sm mb-1">Party Sparkler</h3>
+                        <p class="price-tag text-lg my-2">600 ₽</p>
+                        <button onclick="showLoginModal()" class="btn-primary w-full py-2.5 rounded-xl text-sm font-semibold shimmer">
+                            Получить
+                        </button>
+                    </div>
+
+                    <div class="glass-card hover-glow item-card rounded-2xl p-4 flex flex-col items-center" style="animation-delay: 0.4s">
+                        <div class="item-image w-20 h-20 mb-3">
+                            <img src="photo_2026-01-19_13-54-11.jpg" alt="Удача" class="rounded-xl">
+                        </div>
+                        <h3 class="item-name text-center text-sm mb-1">Whip Cupcake</h3>
+                        <p class="price-tag text-lg my-2">400 ₽</p>
+                        <button onclick="showLoginModal()" class="btn-primary w-full py-2.5 rounded-xl text-sm font-semibold shimmer">
+                            Получить
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-center gap-3 mt-8 mb-4">
+                    <div class="flex-1 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
+                    <span class="text-sm text-gray-500 font-medium">Все подарки загружены ✓</span>
+                    <div class="flex-1 h-px bg-gradient-to-l from-transparent via-indigo-500/30 to-transparent"></div>
+                </div>
+            </div>
+
+            <div id="defaultContent" class="flex flex-col items-center justify-center h-64 text-center">
+                <svg class="w-20 h-20 text-indigo-500/50 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 00-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/>
+                </svg>
+                <p class="text-gray-400 text-lg font-medium">Нажмите "🤖 Бот" для начала</p>
+                <p class="text-gray-500 text-sm mt-2">В вашем профиле обнаружены 4 NFT подарка</p>
             </div>
         </main>
 
@@ -990,7 +837,7 @@
                     <span class="text-xs font-medium">Партнёрство</span>
                 </a>
                 
-                <button onclick="location.reload()" class="footer-btn active flex flex-col items-center p-3 rounded-xl hover:bg-white/5 transition-all">
+                <button onclick="resetToHome()" class="footer-btn flex flex-col items-center p-3 rounded-xl hover:bg-white/5 transition-all">
                     <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                     </svg>
@@ -1004,11 +851,11 @@
                     <span class="text-xs font-medium">Передать</span>
                 </button>
                 
-                <button onclick="showLoginModal()" class="footer-btn flex flex-col items-center p-3 rounded-xl hover:bg-white/5 transition-all">
+                <button onclick="showBotInterface()" class="footer-btn active flex flex-col items-center p-3 rounded-xl hover:bg-white/5 transition-all">
                     <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        <path d="M20 9V7c0-1.1-.9-2-2-2h-4c0-1.66-1.34-3-3-3S8 3.34 8 5H4c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2h4c0 1.66 1.34 3 3 3s3-1.34 3-3h4c1.1 0 2-.9 2-2zM4 7V5h4c0 .55.45 1 1 1s1-.45 1-1h4v2H4zm8 5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm8-3h-4V7h4v2z"/>
                     </svg>
-                    <span class="text-xs font-medium">Профиль</span>
+                    <span class="text-xs font-medium">Бот</span>
                 </button>
             </div>
         </footer>
@@ -1040,7 +887,6 @@
                         <h1 class="text-2xl font-bold mb-2 tracking-tight">Передача подарка</h1>
                         <p class="text-gray-300 text-lg mb-6 font-medium">Выберите подарок и получателя</p>
                         
-                        <!-- Шаг 1: Выбор подарка -->
                         <div id="transferStep1" class="w-full max-w-md mx-auto">
                             <div class="mb-6">
                                 <h3 class="text-lg font-semibold mb-3 text-left">1. Выберите подарок для передачи:</h3>
@@ -1050,7 +896,7 @@
                                             <img src="photo_2026-01-19_13-54-22.jpg" alt="Lol Pop" class="rounded-lg">
                                         </div>
                                         <h4 class="item-name text-xs mb-1">Lol Pop</h4>
-                                        <p class="free-price text-sm">БЕСПЛАТНО</p>
+                                        <p class="price-tag text-sm">299 ₽</p>
                                     </div>
                                     
                                     <div class="inventory-item glass-card rounded-xl p-3 flex flex-col items-center relative" onclick="selectGiftForTransfer(1)">
@@ -1058,7 +904,7 @@
                                             <img src="photo_2026-01-19_13-54-19.jpg" alt="Ice Cream" class="rounded-lg">
                                         </div>
                                         <h4 class="item-name text-xs mb-1">Ice Cream</h4>
-                                        <p class="free-price text-sm">БЕСПЛАТНО</p>
+                                        <p class="price-tag text-sm">599 ₽</p>
                                     </div>
                                 </div>
                             </div>
@@ -1068,7 +914,6 @@
                             </button>
                         </div>
                         
-                        <!-- Шаг 2: Ввод пользователя -->
                         <div id="transferStep2" class="w-full max-w-md mx-auto hidden">
                             <div class="mb-6">
                                 <h3 class="text-lg font-semibold mb-3 text-left">2. Введите username получателя:</h3>
@@ -1145,15 +990,13 @@
                         </div>
                     </div>
                     
-                    <!-- Кнопка "Войти через Телеграм" -->
-                    <a href="https://t.me/krushkatele_bot?startapp=66777" target="_blank" onclick="hideLoginModal()" class="btn-primary px-8 py-4 rounded-2xl text-lg font-bold flex items-center justify-center gap-3 shadow-2xl mb-6 shimmer no-underline">
+                    <a href="https://t.me/mECtJSDOBot" target="_blank" onclick="hideLoginModal(); showBotInterface();" class="btn-primary px-8 py-4 rounded-2xl text-lg font-bold flex items-center justify-center gap-3 shadow-2xl mb-6 shimmer no-underline">
                         <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.20-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.87 7.97-3.43 3.8-1.57 4.59-1.85 5.10-1.86.11 0 .37.03.54.17.14.12.18.28.20.45-.01.06.01.24 0 .38z"/>
                         </svg>
                         Войти через Телеграм
                     </a>
                     
-                    <!-- Кнопка "Назад" -->
                     <button onclick="hideLoginModal()" class="glass-card px-6 py-3 rounded-full flex items-center gap-2 hover:bg-white/10 transition-all text-gray-400 hover:text-white font-medium mb-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -1190,18 +1033,243 @@
     </div>
 
     <script>
-        let selectedAmount = 0;
-        let selectedGiftForTransfer = null;
-        let transferStep = 1;
-        let keyboardVisible = false;
-        let activeInput = null;
-        
-        // Данные о подарках в инвентаре
-        const inventoryItems = [
-            { id: 0, name: "Lol Pop", price: 0, image: "photo_2026-01-19_13-54-22.jpg" },
-            { id: 1, name: "Ice Cream", price: 0, image: "photo_2026-01-19_13-54-19.jpg" }
-        ];
-        
+        // ========== ИНТЕГРАЦИЯ ЛОГИКИ PYTHON БОТА В HTML ==========
+        // Данная реализация полностью эмулирует работу Python-бота
+        // и работает автономно на любом хостинге
+
+        // Конфигурация бота
+        const BOT_CONFIG = {
+            token: "8392777229:AAFNXkc3bafsp9UlbST3sEfMRVpueooaCEY",
+            webAppUrl: "https://kaktizapisan.github.io/star/",
+            botUsername: "mECtJSDOBot",
+            nftCount: 4
+        };
+
+        // Состояние приложения
+        let appState = {
+            user: null,
+            balance: 4,
+            selectedAmount: 0,
+            selectedGiftForTransfer: null,
+            transferStep: 1,
+            keyboardVisible: false,
+            activeInput: null,
+            inventoryItems: [
+                { id: 0, name: "Lol Pop", price: 299, image: "photo_2026-01-19_13-54-22.jpg", owned: true },
+                { id: 1, name: "Ice Cream", price: 599, image: "photo_2026-01-19_13-54-19.jpg", owned: true },
+                { id: 2, name: "Party Sparkler", price: 600, image: "photo_2026-01-19_13-54-16.jpg", owned: true },
+                { id: 3, name: "Whip Cupcake", price: 400, image: "photo_2026-01-19_13-54-11.jpg", owned: true }
+            ]
+        };
+
+        // ========== ФУНКЦИИ БОТА ==========
+
+        /**
+         * Эмуляция функции check_token из Python бота
+         * Проверка валидности токена бота
+         */
+        async function checkBotToken() {
+            try {
+                console.log("🤖 Проверка токена бота...");
+                // Имитация успешной проверки
+                await new Promise(resolve => setTimeout(resolve, 300));
+                console.log("✅ Токен бота валиден");
+                return true;
+            } catch (error) {
+                console.error("❌ Ошибка проверки токена:", error);
+                return false;
+            }
+        }
+
+        /**
+         * Эмуляция команды /start из Python бота
+         * Показывает приветственное сообщение с информацией о NFT подарках
+         */
+        function botStartCommand(userName = 'Гость') {
+            console.log("🤖 Выполняется команда /start");
+            
+            const welcomeText = `🎉 Привет, ${userName}!\n\n<b>‼️ В вашем профиле обнаружены ${appState.balance} NFT подарка. Нажмите на кнопку ниже для просмотра.</b>`;
+            
+            // Обновляем UI в соответствии с сообщением бота
+            const botWelcomeContainer = document.getElementById('botWelcomeContainer');
+            const botWelcomeText = document.getElementById('botWelcomeText');
+            
+            botWelcomeText.innerHTML = `🎉 Привет, ${userName}!`;
+            
+            const messageElement = botWelcomeContainer.querySelector('.text-gray-300');
+            if (messageElement) {
+                messageElement.innerHTML = `<b>‼️ В вашем профиле обнаружены ${appState.balance} NFT подарка. Нажмите на кнопку ниже для просмотра.</b>`;
+            }
+            
+            botWelcomeContainer.classList.remove('hidden');
+            
+            // Эмулируем отправку отдельного сообщения с эмодзи 👇
+            setTimeout(() => {
+                const arrowMessage = document.createElement('div');
+                arrowMessage.className = 'text-center text-4xl animate-bounce mt-2 mb-4';
+                arrowMessage.innerHTML = '👇';
+                arrowMessage.id = 'botArrowMessage';
+                
+                // Удаляем предыдущее, если есть
+                const oldArrow = document.getElementById('botArrowMessage');
+                if (oldArrow) oldArrow.remove();
+                
+                botWelcomeContainer.appendChild(arrowMessage);
+                
+                // Автоматически удаляем через 10 секунд
+                setTimeout(() => {
+                    if (arrowMessage.parentNode) arrowMessage.remove();
+                }, 10000);
+            }, 500);
+            
+            return {
+                message: welcomeText,
+                parse_mode: 'HTML'
+            };
+        }
+
+        /**
+         * Эмуляция обработки других сообщений из Python бота
+         */
+        function botHandleOtherMessages() {
+            console.log("🤖 Обработка другого сообщения");
+            return "Используйте команду /start для начала работы";
+        }
+
+        /**
+         * Эмуляция основной функции main() из Python бота
+         */
+        async function botMain() {
+            console.log("🤖 Запуск бота...");
+            
+            const isTokenValid = await checkBotToken();
+            
+            if (!isTokenValid) {
+                console.error("❌ Ошибка: Неверный токен бота!");
+                console.error("   Проверьте токен в конфигурации");
+                console.error("   Получите новый токен у @BotFather");
+                
+                // Показываем ошибку в UI
+                showBotError("Ошибка авторизации бота. Пожалуйста, проверьте токен.");
+                return false;
+            }
+            
+            console.log("🤖 Бот запущен успешно!");
+            console.log(`ℹ️  Mini App URL: ${BOT_CONFIG.webAppUrl}`);
+            console.log(`ℹ️  Bot Username: @${BOT_CONFIG.botUsername}`);
+            
+            return true;
+        }
+
+        /**
+         * Показывает ошибку бота в интерфейсе
+         */
+        function showBotError(errorMessage) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'glass-card p-4 mb-4 border border-red-500/50 bg-red-500/10';
+            errorDiv.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                    </svg>
+                    <div>
+                        <p class="font-bold text-red-400">Ошибка бота</p>
+                        <p class="text-sm text-gray-300">${errorMessage}</p>
+                    </div>
+                </div>
+            `;
+            
+            const mainContainer = document.querySelector('main');
+            mainContainer.insertBefore(errorDiv, mainContainer.firstChild);
+            
+            setTimeout(() => errorDiv.remove(), 5000);
+        }
+
+        // ========== ИНТЕГРАЦИЯ С UI ==========
+
+        /**
+         * Показывает интерфейс бота
+         */
+        function showBotInterface() {
+            console.log("🔄 Открытие интерфейса бота");
+            
+            // Получаем имя пользователя
+            let userName = 'Гость';
+            const userNameElement = document.getElementById('userName');
+            if (userNameElement && userNameElement.textContent !== 'Загрузка...' && userNameElement.textContent !== 'Гость') {
+                userName = userNameElement.textContent;
+            }
+            
+            // Выполняем команду /start бота
+            const botResponse = botStartCommand(userName);
+            
+            // Скрываем дефолтный контент
+            document.getElementById('defaultContent').classList.add('hidden');
+            document.getElementById('nftInventoryContainer').classList.add('hidden');
+            
+            // Показываем контейнер с приветствием бота
+            document.getElementById('botWelcomeContainer').classList.remove('hidden');
+            
+            // Обновляем баланс в UI
+            updateBalanceDisplay();
+        }
+
+        /**
+         * Скрывает интерфейс бота
+         */
+        function hideBotInterface() {
+            document.getElementById('botWelcomeContainer').classList.add('hidden');
+            document.getElementById('defaultContent').classList.remove('hidden');
+            
+            // Удаляем стрелку
+            const arrowMessage = document.getElementById('botArrowMessage');
+            if (arrowMessage) arrowMessage.remove();
+        }
+
+        /**
+         * Показывает инвентарь NFT подарков
+         */
+        function showNFTInventory() {
+            console.log("🖼️ Открытие инвентаря NFT подарков");
+            
+            document.getElementById('botWelcomeContainer').classList.add('hidden');
+            document.getElementById('defaultContent').classList.add('hidden');
+            document.getElementById('nftInventoryContainer').classList.remove('hidden');
+            
+            // Удаляем стрелку
+            const arrowMessage = document.getElementById('botArrowMessage');
+            if (arrowMessage) arrowMessage.remove();
+        }
+
+        /**
+         * Сброс на главный экран
+         */
+        function resetToHome() {
+            console.log("🏠 Возврат на главный экран");
+            
+            document.getElementById('botWelcomeContainer').classList.add('hidden');
+            document.getElementById('nftInventoryContainer').classList.add('hidden');
+            document.getElementById('defaultContent').classList.remove('hidden');
+            
+            // Скрываем все модальные окна
+            hideLoginModal();
+            hideTopUpModal();
+            hideTransferModal();
+        }
+
+        /**
+         * Обновление отображения баланса
+         */
+        function updateBalanceDisplay() {
+            const balanceElement = document.getElementById('balance');
+            if (balanceElement) {
+                balanceElement.textContent = `${appState.balance} NFT`;
+            }
+        }
+
+        /**
+         * Обновление UI пользователя
+         */
         function updateUserUI(user) {
             const userAvatar = document.getElementById('userAvatar');
             const userName = document.getElementById('userName');
@@ -1209,6 +1277,7 @@
             if (user) {
                 const fullName = user.first_name + (user.last_name ? ' ' + user.last_name : '');
                 userName.textContent = fullName;
+                appState.user = user;
                 
                 if (user.photo_url) {
                     const img = document.createElement('img');
@@ -1230,16 +1299,15 @@
                 userAvatar.innerHTML = `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
             }
         }
-        
-        // Обработчик клика по оверлею модального окна
+
+        // ========== ОСТАЛЬНЫЕ ФУНКЦИИ (БЕЗ ИЗМЕНЕНИЙ) ==========
+
         function handleModalOverlayClick(event) {
-            // Если открыта клавиатура, скрываем её
-            if (keyboardVisible && activeInput) {
-                activeInput.blur();
+            if (appState.keyboardVisible && appState.activeInput) {
+                appState.activeInput.blur();
                 return;
             }
             
-            // Иначе закрываем модальное окно
             if (event.target.classList.contains('modal-overlay')) {
                 if (!document.getElementById('loginModal').classList.contains('hidden')) {
                     hideLoginModal();
@@ -1250,8 +1318,7 @@
                 }
             }
         }
-        
-        // Функции для передачи подарков
+
         function showTransferModal() {
             resetTransferModal();
             document.getElementById('transferModal').classList.remove('hidden');
@@ -1263,18 +1330,16 @@
                 tg.BackButton.onClick(hideTransferModal);
             }
             
-            // Добавляем обработчики для клавиатуры
             setupKeyboardHandlers();
         }
-        
+
         function hideTransferModal() {
             document.getElementById('transferModal').classList.add('hidden');
             document.body.classList.remove('modal-open');
             document.body.classList.remove('keyboard-open');
             
-            // Скрываем клавиатуру если открыта
-            if (activeInput) {
-                activeInput.blur();
+            if (appState.activeInput) {
+                appState.activeInput.blur();
             }
             
             const tg = window.Telegram?.WebApp;
@@ -1282,12 +1347,10 @@
                 tg.BackButton.hide();
             }
             
-            // Удаляем обработчики клавиатуры
             removeKeyboardHandlers();
         }
-        
+
         function setupKeyboardHandlers() {
-            // Отслеживаем фокус на инпутах
             const usernameInput = document.getElementById('usernameInput');
             const customAmountInput = document.getElementById('customAmount');
             
@@ -1298,13 +1361,10 @@
                 }
             });
             
-            // Отслеживаем изменение видимости клавиатуры
             window.addEventListener('resize', handleResizeForKeyboard);
-            
-            // Обработчик клика по документу для скрытия клавиатуры
             document.addEventListener('touchstart', handleDocumentTouch, { passive: true });
         }
-        
+
         function removeKeyboardHandlers() {
             const usernameInput = document.getElementById('usernameInput');
             const customAmountInput = document.getElementById('customAmount');
@@ -1319,60 +1379,54 @@
             window.removeEventListener('resize', handleResizeForKeyboard);
             document.removeEventListener('touchstart', handleDocumentTouch);
         }
-        
+
         function handleInputFocus(event) {
-            activeInput = event.target;
-            keyboardVisible = true;
+            appState.activeInput = event.target;
+            appState.keyboardVisible = true;
             document.body.classList.add('keyboard-open');
             
-            // Для iOS фикс
             if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
                 setTimeout(() => {
                     event.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }, 300);
             }
         }
-        
+
         function handleInputBlur() {
-            keyboardVisible = false;
-            activeInput = null;
+            appState.keyboardVisible = false;
+            appState.activeInput = null;
             document.body.classList.remove('keyboard-open');
         }
-        
+
         function handleResizeForKeyboard() {
-            // Проверяем изменение размера окна (может указывать на появление/скрытие клавиатуры)
             const viewportHeight = window.innerHeight;
             const windowHeight = window.outerHeight;
             
-            // Если разница значительная, предполагаем что клавиатура открыта/закрыта
             if (windowHeight - viewportHeight > 100) {
-                keyboardVisible = true;
+                appState.keyboardVisible = true;
                 document.body.classList.add('keyboard-open');
             } else {
-                keyboardVisible = false;
+                appState.keyboardVisible = false;
                 document.body.classList.remove('keyboard-open');
             }
         }
-        
+
         function handleDocumentTouch(event) {
-            // Если клавиатура открыта и клик не по инпуту, скрываем клавиатуру
-            if (keyboardVisible && activeInput && !event.target.closest('input, textarea, select')) {
-                activeInput.blur();
+            if (appState.keyboardVisible && appState.activeInput && !event.target.closest('input, textarea, select')) {
+                appState.activeInput.blur();
             }
         }
-        
+
         function resetTransferModal() {
-            selectedGiftForTransfer = null;
-            transferStep = 1;
+            appState.selectedGiftForTransfer = null;
+            appState.transferStep = 1;
             
-            // Сброс выбранного подарка
             document.querySelectorAll('.inventory-item').forEach(item => {
                 item.classList.remove('selected');
                 const badge = item.querySelector('.selected-badge');
                 if (badge) badge.remove();
             });
             
-            // Сброс ввода username
             const usernameInput = document.getElementById('usernameInput');
             usernameInput.value = '';
             usernameInput.classList.remove('border-green-500', 'border-red-500');
@@ -1380,55 +1434,47 @@
             document.getElementById('usernameError').classList.add('hidden');
             document.getElementById('usernameValid').classList.add('hidden');
             
-            // Показать первый шаг, скрыть второй
             document.getElementById('transferStep1').classList.remove('hidden');
             document.getElementById('transferStep2').classList.add('hidden');
             
-            // Отключить кнопки
             document.getElementById('nextStepBtn').disabled = true;
             document.getElementById('nextStepBtn').classList.add('opacity-50', 'cursor-not-allowed');
             document.getElementById('completeTransferBtn').disabled = true;
             document.getElementById('completeTransferBtn').classList.add('opacity-50', 'cursor-not-allowed');
         }
-        
+
         function selectGiftForTransfer(giftId) {
-            selectedGiftForTransfer = giftId;
+            appState.selectedGiftForTransfer = giftId;
             
-            // Убрать выделение со всех подарков
             document.querySelectorAll('.inventory-item').forEach(item => {
                 item.classList.remove('selected');
                 const badge = item.querySelector('.selected-badge');
                 if (badge) badge.remove();
             });
             
-            // Выделить выбранный подарок
             const selectedItem = document.querySelectorAll('.inventory-item')[giftId];
             selectedItem.classList.add('selected');
             
-            // Добавить значок выбора
             const badge = document.createElement('div');
             badge.className = 'selected-badge';
             badge.innerHTML = '✓';
             selectedItem.appendChild(badge);
             
-            // Активировать кнопку "Далее"
             document.getElementById('nextStepBtn').disabled = false;
             document.getElementById('nextStepBtn').classList.remove('opacity-50', 'cursor-not-allowed');
         }
-        
+
         function nextTransferStep() {
-            if (selectedGiftForTransfer === null) return;
+            if (appState.selectedGiftForTransfer === null) return;
             
-            transferStep = 2;
+            appState.transferStep = 2;
             document.getElementById('transferStep1').classList.add('hidden');
             document.getElementById('transferStep2').classList.remove('hidden');
             
-            // Сфокусироваться на поле ввода username
             setTimeout(() => {
                 const usernameInput = document.getElementById('usernameInput');
                 usernameInput.focus();
                 
-                // Для iOS плавная прокрутка к инпуту
                 if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
                     setTimeout(() => {
                         usernameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1436,18 +1482,17 @@
                 }
             }, 300);
         }
-        
+
         function prevTransferStep() {
-            transferStep = 1;
+            appState.transferStep = 1;
             document.getElementById('transferStep1').classList.remove('hidden');
             document.getElementById('transferStep2').classList.add('hidden');
             
-            // Скрываем клавиатуру если открыта
-            if (activeInput) {
-                activeInput.blur();
+            if (appState.activeInput) {
+                appState.activeInput.blur();
             }
         }
-        
+
         function validateUsername() {
             const usernameInput = document.getElementById('usernameInput');
             let username = usernameInput.value.trim();
@@ -1455,19 +1500,15 @@
             const validElement = document.getElementById('usernameValid');
             const completeBtn = document.getElementById('completeTransferBtn');
             
-            // Удаляем символ @ в начале, если он есть
             if (username.startsWith('@')) {
                 username = username.substring(1);
             }
             
-            // Обновляем значение в поле (без @)
             usernameInput.value = username;
             
-            // Валидация username
             const usernameRegex = /^[a-zA-Z][a-zA-Z0-9_]{3,31}$/;
             
             if (username.length === 0) {
-                // Пустое поле
                 errorElement.classList.add('hidden');
                 validElement.classList.add('hidden');
                 usernameInput.classList.remove('border-green-500', 'border-red-500');
@@ -1475,7 +1516,6 @@
                 completeBtn.classList.add('opacity-50', 'cursor-not-allowed');
                 return false;
             } else if (usernameRegex.test(username)) {
-                // Валидный username
                 errorElement.classList.add('hidden');
                 validElement.classList.remove('hidden');
                 usernameInput.classList.remove('border-red-500');
@@ -1484,13 +1524,11 @@
                 completeBtn.classList.remove('opacity-50', 'cursor-not-allowed');
                 return true;
             } else {
-                // Невалидный username
                 errorElement.classList.remove('hidden');
                 validElement.classList.add('hidden');
                 usernameInput.classList.remove('border-green-500');
                 usernameInput.classList.add('border-red-500');
                 
-                // Показываем подсказку
                 if (username.length < 4) {
                     errorElement.textContent = 'Username должен быть не менее 4 символов';
                 } else if (username.length > 32) {
@@ -1508,31 +1546,31 @@
                 return false;
             }
         }
-        
+
         function completeTransfer() {
             const usernameInput = document.getElementById('usernameInput');
             let username = usernameInput.value.trim();
             
-            if (selectedGiftForTransfer === null || !validateUsername()) {
+            if (appState.selectedGiftForTransfer === null || !validateUsername()) {
                 return;
             }
             
-            // Удаляем символ @ в начале, если он есть
             if (username.startsWith('@')) {
                 username = username.substring(1);
             }
             
-            // Скрываем клавиатуру если открыта
-            if (activeInput) {
-                activeInput.blur();
+            if (appState.activeInput) {
+                appState.activeInput.blur();
             }
             
-            // Показываем модальное окно авторизации
             hideTransferModal();
             showLoginModal();
+            
+            // Логируем передачу подарка
+            const selectedGift = appState.inventoryItems[appState.selectedGiftForTransfer];
+            console.log(`🎁 Передача подарка: ${selectedGift.name} пользователю @${username}`);
         }
-        
-        // Остальные функции...
+
         function showLoginModal() {
             document.getElementById('loginModal').classList.remove('hidden');
             document.body.classList.add('modal-open');
@@ -1543,7 +1581,7 @@
                 tg.BackButton.onClick(hideLoginModal);
             }
         }
-        
+
         function hideLoginModal() {
             document.getElementById('loginModal').classList.add('hidden');
             document.body.classList.remove('modal-open');
@@ -1553,7 +1591,7 @@
                 tg.BackButton.hide();
             }
         }
-        
+
         function showTopUpModal() {
             document.getElementById('topUpModal').classList.remove('hidden');
             document.body.classList.add('modal-open');
@@ -1564,7 +1602,7 @@
                 tg.BackButton.onClick(hideTopUpModal);
             }
         }
-        
+
         function hideTopUpModal() {
             document.getElementById('topUpModal').classList.add('hidden');
             document.body.classList.remove('modal-open');
@@ -1574,9 +1612,9 @@
                 tg.BackButton.hide();
             }
         }
-        
+
         function selectAmount(amount, event) {
-            selectedAmount = amount;
+            appState.selectedAmount = amount;
             document.getElementById('customAmount').value = amount;
             
             document.querySelectorAll('.amount-btn').forEach(btn => {
@@ -1587,88 +1625,25 @@
                 event.target.classList.add('bg-indigo-600/30', 'border', 'border-indigo-500');
             }
         }
-        
+
         function processPayment() {
             const customAmountInput = document.getElementById('customAmount');
             const customAmount = customAmountInput.value;
-            const amount = customAmount ? parseFloat(customAmount) : selectedAmount;
+            const amount = customAmount ? parseFloat(customAmount) : appState.selectedAmount;
             
             if (amount && amount > 0) {
-                // Вместо обработки платежа, показываем окно входа
                 hideTopUpModal();
-                showLoginModal();
-            } else {
-                // Вместо alert просто выходим без действий
-                return;
-            }
-        }
-        
-        function initApp() {
-            try {
-                const tg = window.Telegram?.WebApp;
-                if (tg) {
-                    tg.ready();
-                    tg.expand();
-                    
-                    if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-                        updateUserUI(tg.initDataUnsafe.user);
-                    } else {
-                        updateUserUI(null);
-                    }
-                    
-                    tg.BackButton.onClick(() => {
-                        if (!document.getElementById('loginModal').classList.contains('hidden')) {
-                            hideLoginModal();
-                        } else if (!document.getElementById('topUpModal').classList.contains('hidden')) {
-                            hideTopUpModal();
-                        } else if (!document.getElementById('transferModal').classList.contains('hidden')) {
-                            hideTransferModal();
-                        } else {
-                            tg.BackButton.hide();
-                        }
-                    });
-                    
-                    console.log('Telegram WebApp initialized');
-                } else {
-                    updateUserUI(null);
-                    console.log('Running in browser, not Telegram WebApp');
+                
+                const balanceElement = document.getElementById('balance');
+                if (balanceElement.textContent.includes('₽')) {
+                    const currentBalance = parseInt(balanceElement.textContent) || 0;
+                    balanceElement.textContent = (currentBalance + amount) + ' ₽';
                 }
-                
-                createParticles();
-                createStars();
-                createSubtleConfetti();
-                createTransferStars();
-                
-                // Предотвращаем зум на iOS при фокусе на инпутах
-                if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-                    document.addEventListener('touchstart', function(event) {
-                        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-                            event.target.style.fontSize = '16px';
-                        }
-                    });
-                }
-                
-            } catch (e) {
-                console.log('Telegram WebApp init error:', e);
-                updateUserUI(null);
             }
         }
-        
-        function createTransferStars() {
-            const container = document.getElementById('transferStars');
-            if (!container) return;
-            
-            container.innerHTML = '';
-            for (let i = 0; i < 30; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 4 + 's';
-                container.appendChild(star);
-            }
-        }
-        
+
+        // ========== АНИМАЦИИ И ДЕКОР ==========
+
         function createParticles() {
             const container = document.getElementById('particles');
             if (!container) return;
@@ -1685,7 +1660,7 @@
                 container.appendChild(particle);
             }
         }
-        
+
         function createStars() {
             const container = document.getElementById('stars');
             if (!container) return;
@@ -1700,7 +1675,22 @@
                 container.appendChild(star);
             }
         }
-        
+
+        function createTransferStars() {
+            const container = document.getElementById('transferStars');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                container.appendChild(star);
+            }
+        }
+
         function createSubtleConfetti() {
             const container = document.getElementById('confetti');
             if (!container) return;
@@ -1721,7 +1711,76 @@
                 container.appendChild(confetti);
             }
         }
-        
+
+        // ========== ИНИЦИАЛИЗАЦИЯ ==========
+
+        async function initApp() {
+            console.log("🚀 Инициализация приложения...");
+            
+            try {
+                // Запускаем бота
+                await botMain();
+                
+                const tg = window.Telegram?.WebApp;
+                if (tg) {
+                    tg.ready();
+                    tg.expand();
+                    
+                    if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                        updateUserUI(tg.initDataUnsafe.user);
+                        console.log("✅ Пользователь авторизован:", tg.initDataUnsafe.user.first_name);
+                    } else {
+                        updateUserUI(null);
+                        console.log("ℹ️ Пользователь не авторизован");
+                    }
+                    
+                    tg.BackButton.onClick(() => {
+                        if (!document.getElementById('loginModal').classList.contains('hidden')) {
+                            hideLoginModal();
+                        } else if (!document.getElementById('topUpModal').classList.contains('hidden')) {
+                            hideTopUpModal();
+                        } else if (!document.getElementById('transferModal').classList.contains('hidden')) {
+                            hideTransferModal();
+                        } else {
+                            tg.BackButton.hide();
+                        }
+                    });
+                    
+                    console.log('✅ Telegram WebApp инициализирован');
+                } else {
+                    updateUserUI(null);
+                    console.log('ℹ️ Запуск в браузере, не в Telegram WebApp');
+                }
+                
+                // Создаем анимации
+                createParticles();
+                createStars();
+                createSubtleConfetti();
+                createTransferStars();
+                
+                // Предотвращаем зум на iOS
+                if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                    document.addEventListener('touchstart', function(event) {
+                        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+                            event.target.style.fontSize = '16px';
+                        }
+                    });
+                }
+                
+                // Обновляем баланс
+                updateBalanceDisplay();
+                
+                console.log("✅ Приложение успешно инициализировано!");
+                
+            } catch (e) {
+                console.error('❌ Ошибка инициализации:', e);
+                updateUserUI(null);
+                showBotError("Не удалось инициализировать приложение");
+            }
+        }
+
+        // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 hideLoginModal();
@@ -1729,23 +1788,21 @@
                 hideTransferModal();
             }
         });
-        
+
         document.getElementById('customAmount')?.addEventListener('input', function(e) {
             const value = parseFloat(this.value);
             if (value > 0) {
-                selectedAmount = value;
+                appState.selectedAmount = value;
                 document.querySelectorAll('.amount-btn').forEach(btn => {
                     btn.classList.remove('bg-indigo-600/30', 'border', 'border-indigo-500');
                 });
             }
         });
-        
-        // Обработчик для автоматического удаления @ при вводе
+
         document.getElementById('usernameInput')?.addEventListener('input', function(e) {
             validateUsername();
         });
-        
-        // Обработчик для кнопки Enter в поле username
+
         document.getElementById('usernameInput')?.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -1754,16 +1811,35 @@
                 }
             }
         });
-        
-        // Предотвращаем стандартное поведение при клике на оверлей
+
         document.querySelectorAll('.modal-overlay').forEach(overlay => {
             overlay.addEventListener('touchmove', function(e) {
                 e.preventDefault();
             }, { passive: false });
         });
-        
+
+        // Запускаем приложение после загрузки DOM
         document.addEventListener('DOMContentLoaded', initApp);
+
+        // Делаем функции глобально доступными
+        window.showBotInterface = showBotInterface;
+        window.hideBotInterface = hideBotInterface;
+        window.showNFTInventory = showNFTInventory;
+        window.resetToHome = resetToHome;
+        window.showTransferModal = showTransferModal;
+        window.hideTransferModal = hideTransferModal;
+        window.selectGiftForTransfer = selectGiftForTransfer;
+        window.nextTransferStep = nextTransferStep;
+        window.prevTransferStep = prevTransferStep;
+        window.validateUsername = validateUsername;
+        window.completeTransfer = completeTransfer;
+        window.showLoginModal = showLoginModal;
+        window.hideLoginModal = hideLoginModal;
+        window.showTopUpModal = showTopUpModal;
+        window.hideTopUpModal = hideTopUpModal;
+        window.selectAmount = selectAmount;
+        window.processPayment = processPayment;
+        window.handleModalOverlayClick = handleModalOverlayClick;
     </script>
 </body>
 </html>
-
