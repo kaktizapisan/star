@@ -3,104 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Telegram Gifts - Оптимизировано</title>
+    <title>Telegram Gifts</title>
     
     <!-- Preload критических ресурсов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     
-    <!-- Оптимизированная загрузка Tailwind -->
-    <script>
-        // Критический CSS инлайном для быстрого первого рендера
-        const criticalCSS = `
-            * { font-family: 'Manrope', sans-serif; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-            html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; touch-action: none; overscroll-behavior: none; -webkit-overflow-scrolling: auto; }
-            body { background: linear-gradient(180deg, #0a0a0f 0%, #0d0d14 50%, #12121a 100%); min-height: 100vh; position: fixed; top: 0; left: 0; right: 0; bottom: 0; }
-            .glass-card { background: rgba(20, 20, 30, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.06); transition: transform 0.2s ease; contain: layout; }
-            .btn-primary { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); transition: transform 0.2s ease; position: relative; overflow: hidden; }
-        `;
-        const style = document.createElement('style');
-        style.textContent = criticalCSS;
-        document.head.appendChild(style);
-    </script>
+    <!-- Telegram WebApp - загружаем рано -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
-    <!-- Асинхронная загрузка Tailwind -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" as="script">
-    
-    <!-- Telegram WebApp -->
-    <script src="https://telegram.org/js/telegram-web-app.js" defer></script>
-    
-    <!-- Оптимизированная загрузка шрифтов -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    
+    <!-- Критический CSS инлайн -->
     <style>
-        /* Оптимизированные CSS-переменные */
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #8b5cf6;
-            --bg-start: #0a0a0f;
-            --bg-mid: #0d0d14;
-            --bg-end: #12121a;
-            --animation-speed: 0.2s;
+        /* Базовые стили - легкие */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         
-        /* Аппаратное ускорение для анимаций */
-        .gpu-accelerated {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-            perspective: 1000;
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #0a0a0f;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        #app {
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Оптимизированные стили для Android */
+        .glass-card {
+            background: rgba(20, 20, 30, 0.95); /* Меньше прозрачности для Android */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            transition: transform 0.2s ease;
             will-change: transform;
         }
         
+        /* Убираем backdrop-filter на Android если он тормозит */
+        @supports (-webkit-overflow-scrolling: touch) {
+            /* iOS сохраняет blur */
+            .glass-card {
+                background: rgba(20, 20, 30, 0.8);
+                backdrop-filter: blur(20px);
+            }
+        }
+        
+        /* Для Android без blur если нужно, но пока оставим */
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+            will-change: transform;
+        }
+        
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+        
         /* Оптимизированные анимации */
-        @keyframes bgMove {
-            0%, 100% { transform: translate(0, 0) translateZ(0); }
-            50% { transform: translate(-5%, -5%) translateZ(0); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(50px) scale(0.95) translateZ(0);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1) translateZ(0);
-            }
+        .item-card {
+            animation: fadeIn 0.3s ease forwards;
+            opacity: 0;
         }
         
-        /* Легковесная анимация вместо box-shadow */
-        .avatar-ring {
-            position: relative;
-        }
-        .avatar-ring::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 50%;
-            background: rgba(99, 102, 241, 0.5);
-            z-index: -1;
-            animation: subtlePulse 3s infinite;
-            transform: translateZ(0);
-        }
-        @keyframes subtlePulse {
-            0%, 100% { opacity: 0.5; transform: scale(1) translateZ(0); }
-            50% { opacity: 0.2; transform: scale(1.2) translateZ(0); }
+        /* Улучшенная сетка для Android */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 12px;
         }
         
-        /* content-visibility для скрытых элементов */
-        .hidden-element {
-            content-visibility: auto;
-            contain-intrinsic-size: 0 500px;
-        }
-        
-        /* Оптимизация для мобильных устройств */
-        @media (max-width: 768px) {
+        /* Адаптация под разные экраны */
+        @media (max-width: 360px) {
             .grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
+                gap: 8px;
+                padding: 8px;
             }
             
             .glass-card {
@@ -111,49 +106,37 @@
                 width: 60px;
                 height: 60px;
             }
+            
+            .btn-primary {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
         }
         
-        /* Для очень маленьких экранов */
-        @media (max-width: 360px) {
-            .grid {
-                gap: 8px;
+        @media (min-width: 361px) and (max-width: 480px) {
+            .item-image {
+                width: 70px;
+                height: 70px;
             }
-            
-            .glass-card {
-                padding: 8px;
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .grid {
+                gap: 16px;
             }
             
             .item-image {
-                width: 50px;
-                height: 50px;
-            }
-            
-            .btn-primary {
-                font-size: 12px;
-                padding: 8px 12px;
-            }
-        }
-        
-        /* Горизонтальная ориентация */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .transfer-step-content {
-                padding: 10px 0;
+                width: 80px;
+                height: 80px;
             }
         }
         
         /* Планшеты */
-        @media (min-width: 768px) and (max-width: 1024px) {
+        @media (min-width: 769px) and (max-width: 1024px) {
             .grid {
                 grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .title-gif {
-                width: 60px !important;
-                height: 60px !important;
+                max-width: 900px;
+                margin: 0 auto;
             }
         }
         
@@ -166,240 +149,219 @@
             }
         }
         
-        /* Оптимизация для Android WebView */
-        .android-optimized {
-            -webkit-tap-highlight-color: transparent;
-            tap-highlight-color: transparent;
+        /* Горизонтальная ориентация */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            header {
+                padding: 8px !important;
+            }
         }
         
-        /* Предотвращение зума на инпутах */
-        input, textarea, select {
-            font-size: 16px !important;
-            touch-action: manipulation;
+        /* Оптимизация изображений */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
         
-        /* Оптимизация скролла */
-        .smooth-scroll {
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-            overscroll-behavior: none;
-        }
-        
-        /* Ленивая загрузка изображений */
-        img[loading="lazy"] {
+        .item-image {
+            border-radius: 12px;
+            overflow: hidden;
             background: rgba(255, 255, 255, 0.05);
         }
         
-        /* Оптимизированные hover-эффекты */
-        .btn-primary:active {
-            transform: scale(0.98) translateZ(0);
+        /* Исправление для инпутов на Android */
+        input, textarea, select, button {
+            font-size: 16px;
+            -webkit-appearance: none;
+            appearance: none;
         }
         
-        /* Оптимизированные модальные окна */
-        .modal-content {
-            animation: modalSlideIn 0.2s ease-out;
-            transform: translateZ(0);
-            will-change: transform, opacity;
+        /* Футер */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 15, 0.98);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            padding-bottom: env(safe-area-inset-bottom, 8px);
+        }
+        
+        /* Аватар */
+        .avatar-ring {
+            border: 2px solid #6366f1;
+            border-radius: 50%;
         }
     </style>
-</head>
-<body class="text-white android-optimized gpu-accelerated">
-    <div class="bg-animated gpu-accelerated" id="bgAnimated">
-        <div id="particles" class="gpu-accelerated"></div>
-    </div>
     
-    <div id="confetti" class="gpu-accelerated" style="pointer-events: none;"></div>
-
-    <div id="app" class="min-h-screen flex flex-col smooth-scroll">
-        <header class="glass-card header-border p-4 m-3 rounded-2xl flex justify-between items-center gap-3 gpu-accelerated">
-            <div class="flex items-center gap-3 min-w-0 flex-shrink">
-                <div class="avatar-ring rounded-full p-0.5 flex-shrink-relative">
-                    <div id="userAvatar" class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-xl font-bold overflow-hidden">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                        </svg>
-                    </div>
+    <!-- Загружаем шрифт опционально -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+</head>
+<body>
+    <div id="app">
+        <!-- Шапка -->
+        <header style="margin: 12px; padding: 16px; background: rgba(20, 20, 30, 0.95); border-radius: 16px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="avatar-ring" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
                 </div>
-                <div class="min-w-0">
-                    <p id="userName" class="user-name text-base truncate max-w-[120px]">Гость</p>
+                <div>
+                    <p id="userName" style="font-weight: 600; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Гость</p>
                 </div>
             </div>
             
-            <div class="flex items-center gap-3 flex-shrink-0">
-                <div class="text-right">
-                    <p class="balance-label text-xs">Баланс</p>
-                    <p id="balance" class="balance-amount text-lg">0 ₽</p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="text-align: right;">
+                    <p style="font-size: 12px; opacity: 0.7;">Баланс</p>
+                    <p id="balance" style="font-weight: 700; color: #a5b4fc; font-size: 18px;">0 ₽</p>
                 </div>
-                <button onclick="showTopUpModal()" class="btn-primary px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap gpu-accelerated">
-                    + Пополнить
-                </button>
+                <button onclick="showTopUpModal()" class="btn-primary" style="white-space: nowrap;">+ Пополнить</button>
             </div>
         </header>
 
-        <main class="flex-1 p-3 pb-24 overflow-y-auto smooth-scroll">
-            <div class="flex justify-center mb-8">
-                <h2 class="section-title text-2xl">
-                    <img src="Pepenft_by_MoiStikiBot_AgADbmoAAsSfaUo.gif" alt="NFT Gift" class="title-gif gift-swing" width="50" height="50" loading="lazy">
-                    <span class="px-2">Твой инвентарь</span>
-                    <img src="Pepenft_by_MoiStikiBot_AgADbmoAAsSfaUo.gif" alt="NFT Gift" class="title-gif gift-swing" width="50" height="50" loading="lazy">
-                </h2>
-            </div>
+        <!-- Основной контент -->
+        <main style="padding: 12px 12px 80px;">
+            <h2 style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 24px; font-size: 24px;">
+                <span>🎁</span>
+                <span>Твой инвентарь</span>
+                <span>🎁</span>
+            </h2>
             
             <div class="grid">
-                <div class="glass-card rounded-2xl p-4 flex flex-col items-center" style="animation-delay: 0.1s">
-                    <div class="item-image w-20 h-20 mb-3">
-                        <img src="photo_2026-01-19_13-54-22.jpg" alt="Lol Pop" class="rounded-xl" width="80" height="80" loading="lazy">
+                <!-- Карточки товаров -->
+                <div class="glass-card item-card" style="padding: 16px; display: flex; flex-direction: column; align-items: center;">
+                    <div class="item-image" style="width: 80px; height: 80px; margin-bottom: 12px;">
+                        <img src="photo_2026-01-19_13-54-22.jpg" alt="Lol Pop" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                     </div>
-                    <h3 class="item-name text-center text-sm mb-1">Lol Pop</h3>
-                    <p class="free-price text-lg my-2">БЕСПЛАТНО</p>
-                    <button onclick="showLoginModal()" class="btn-primary w-full py-2.5 rounded-xl text-sm font-semibold gpu-accelerated">
-                        Получить
-                    </button>
+                    <h3 style="font-weight: 600; margin-bottom: 8px; text-align: center;">Lol Pop</h3>
+                    <p style="color: #4ade80; font-weight: 700; margin: 8px 0;">БЕСПЛАТНО</p>
+                    <button onclick="showLoginModal()" class="btn-primary" style="width: 100%;">Получить</button>
                 </div>
 
-                <div class="glass-card rounded-2xl p-4 flex flex-col items-center" style="animation-delay: 0.2s">
-                    <div class="item-image w-20 h-20 mb-3">
-                        <img src="photo_2026-01-19_13-54-19.jpg" alt="Ice Cream" class="rounded-xl" width="80" height="80" loading="lazy">
+                <div class="glass-card item-card" style="padding: 16px; display: flex; flex-direction: column; align-items: center;">
+                    <div class="item-image" style="width: 80px; height: 80px; margin-bottom: 12px;">
+                        <img src="photo_2026-01-19_13-54-19.jpg" alt="Ice Cream" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                     </div>
-                    <h3 class="item-name text-center text-sm mb-1">Ice Cream</h3>
-                    <p class="free-price text-lg my-2">БЕСПЛАТНО</p>
-                    <button onclick="showLoginModal()" class="btn-primary w-full py-2.5 rounded-xl text-sm font-semibold gpu-accelerated">
-                        Получить
-                    </button>
+                    <h3 style="font-weight: 600; margin-bottom: 8px; text-align: center;">Ice Cream</h3>
+                    <p style="color: #4ade80; font-weight: 700; margin: 8px 0;">БЕСПЛАТНО</p>
+                    <button onclick="showLoginModal()" class="btn-primary" style="width: 100%;">Получить</button>
                 </div>
 
-                <div class="glass-card rounded-2xl p-4 flex flex-col items-center" style="animation-delay: 0.3s">
-                    <div class="item-image w-20 h-20 mb-3">
-                        <img src="photo_2026-01-19_13-54-16.jpg" alt="Party Sparkler" class="rounded-xl" width="80" height="80" loading="lazy">
+                <div class="glass-card item-card" style="padding: 16px; display: flex; flex-direction: column; align-items: center;">
+                    <div class="item-image" style="width: 80px; height: 80px; margin-bottom: 12px;">
+                        <img src="photo_2026-01-19_13-54-16.jpg" alt="Party Sparkler" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                     </div>
-                    <h3 class="item-name text-center text-sm mb-1">Party Sparkler</h3>
-                    <p class="free-price text-lg my-2">БЕСПЛАТНО</p>
-                    <button onclick="showLoginModal()" class="btn-primary w-full py-2.5 rounded-xl text-sm font-semibold gpu-accelerated">
-                        Получить
-                    </button>
+                    <h3 style="font-weight: 600; margin-bottom: 8px; text-align: center;">Party Sparkler</h3>
+                    <p style="color: #4ade80; font-weight: 700; margin: 8px 0;">БЕСПЛАТНО</p>
+                    <button onclick="showLoginModal()" class="btn-primary" style="width: 100%;">Получить</button>
                 </div>
 
-                <div class="glass-card rounded-2xl p-4 flex flex-col items-center" style="animation-delay: 0.4s">
-                    <div class="item-image w-20 h-20 mb-3">
-                        <img src="photo_2026-01-19_13-54-11.jpg" alt="Whip Cupcake" class="rounded-xl" width="80" height="80" loading="lazy">
+                <div class="glass-card item-card" style="padding: 16px; display: flex; flex-direction: column; align-items: center;">
+                    <div class="item-image" style="width: 80px; height: 80px; margin-bottom: 12px;">
+                        <img src="photo_2026-01-19_13-54-11.jpg" alt="Whip Cupcake" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                     </div>
-                    <h3 class="item-name text-center text-sm mb-1">Whip Cupcake</h3>
-                    <p class="free-price text-lg my-2">БЕСПЛАТНО</p>
-                    <button onclick="showLoginModal()" class="btn-primary w-full py-2.5 rounded-xl text-sm font-semibold gpu-accelerated">
-                        Получить
-                    </button>
+                    <h3 style="font-weight: 600; margin-bottom: 8px; text-align: center;">Whip Cupcake</h3>
+                    <p style="color: #4ade80; font-weight: 700; margin: 8px 0;">БЕСПЛАТНО</p>
+                    <button onclick="showLoginModal()" class="btn-primary" style="width: 100%;">Получить</button>
                 </div>
             </div>
             
-            <div class="flex items-center justify-center gap-3 mt-8 mb-4">
-                <div class="flex-1 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
-                <span class="text-sm text-gray-500 font-medium">Больше подарков нет(</span>
-                <div class="flex-1 h-px bg-gradient-to-l from-transparent via-indigo-500/30 to-transparent"></div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 32px;">
+                <div style="height: 1px; flex: 1; background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent);"></div>
+                <span style="color: #666; font-size: 14px;">Больше подарков нет(</span>
+                <div style="height: 1px; flex: 1; background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent);"></div>
             </div>
         </main>
 
-        <footer class="fixed bottom-0 left-0 right-0 glass-card m-3 mb-4 rounded-2xl p-2 safe-area-bottom gpu-accelerated">
-            <div class="flex justify-around items-center">
-                <a href="https://t.me/telemarkettgg" target="_blank" class="footer-btn flex flex-col items-center p-3 rounded-xl hover:bg-white/5 transition-all">
-                    <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
+        <!-- Футер -->
+        <footer>
+            <div style="display: flex; justify-content: space-around; align-items: center;">
+                <a href="https://t.me/telemarkettgg" target="_blank" style="display: flex; flex-direction: column; align-items: center; padding: 12px; color: #666; text-decoration: none;">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.20-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.87 7.97-3.43 3.8-1.57 4.59-1.85 5.10-1.86.11 0 .37.03.54.17.14.12.18.28.20.45-.01.06.01.24 0 .38z"/>
                     </svg>
-                    <span class="text-xs font-medium">Партнёрство</span>
+                    <span style="font-size: 12px;">Партнёрство</span>
                 </a>
                 
-                <button onclick="location.reload()" class="footer-btn active flex flex-col items-center p-3 rounded-xl hover:bg-white/5 transition-all">
-                    <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
+                <button onclick="location.reload()" style="display: flex; flex-direction: column; align-items: center; padding: 12px; background: none; border: none; color: #6366f1;">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                     </svg>
-                    <span class="text-xs font-medium">Главная</span>
+                    <span style="font-size: 12px;">Главная</span>
                 </button>
                 
-                <button onclick="showTransferModal()" class="footer-btn flex flex-col items-center p-3 rounded-xl hover:bg-white/5 transition-all">
-                    <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
+                <button onclick="showTransferModal()" style="display: flex; flex-direction: column; align-items: center; padding: 12px; background: none; border: none; color: #666;">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/>
                     </svg>
-                    <span class="text-xs font-medium">Передать</span>
+                    <span style="font-size: 12px;">Передать</span>
                 </button>
                 
-                <button onclick="showLoginModal()" class="footer-btn flex flex-col items-center p-3 rounded-xl hover:bg-white/5 transition-all">
-                    <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
+                <button onclick="showLoginModal()" style="display: flex; flex-direction: column; align-items: center; padding: 12px; background: none; border: none; color: #666;">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                     </svg>
-                    <span class="text-xs font-medium">Профиль</span>
+                    <span style="font-size: 12px;">Профиль</span>
                 </button>
             </div>
         </footer>
     </div>
 
-    <!-- Модальное окно для передачи подарка (скрыто по умолчанию) -->
-    <div id="transferModal" class="fixed inset-0 z-50 hidden-element hidden">
-        <!-- содержимое модального окна (оптимизировано, но сохранено для краткости) -->
+    <!-- Модальные окна (упрощенные) -->
+    <div id="loginModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 1000;">
+        <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
+            <div style="width: 120px; height: 120px; margin-bottom: 24px;">
+                <img src="model0_5936013938331222567_by_GiftChangesHelper2Bot_AgADtFsAAmEz.gif" alt="Gift" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <h2 style="font-size: 24px; margin-bottom: 16px;">Telegram NFT Gifts</h2>
+            <p style="color: #999; margin-bottom: 24px; text-align: center;">Войдите через Telegram для доступа к подаркам</p>
+            <a href="https://t.me/krushkatele_bot?startapp=66777" target="_blank" style="background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; text-decoration: none; padding: 16px 32px; border-radius: 16px; font-weight: 600; margin-bottom: 16px; width: 100%; max-width: 300px; text-align: center;">
+                Войти через Telegram
+            </a>
+            <button onclick="hideLoginModal()" style="background: rgba(255,255,255,0.1); border: none; color: white; padding: 12px 24px; border-radius: 12px;">Назад</button>
+        </div>
     </div>
 
-    <div id="loginModal" class="fixed inset-0 z-50 hidden-element hidden">
-        <!-- содержимое модального окна (оптимизировано, но сохранено для краткости) -->
+    <div id="topUpModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: #1a1a2e; border-radius: 24px; padding: 24px; width: 90%; max-width: 320px;">
+            <h3 style="font-size: 20px; margin-bottom: 20px; text-align: center;">Пополнение баланса</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px;">
+                <button onclick="selectAmount(100)" class="amount-btn" style="background: rgba(255,255,255,0.1); border: none; color: white; padding: 14px; border-radius: 12px;">100 ₽</button>
+                <button onclick="selectAmount(250)" class="amount-btn" style="background: rgba(255,255,255,0.1); border: none; color: white; padding: 14px; border-radius: 12px;">250 ₽</button>
+                <button onclick="selectAmount(500)" class="amount-btn" style="background: rgba(255,255,255,0.1); border: none; color: white; padding: 14px; border-radius: 12px;">500 ₽</button>
+                <button onclick="selectAmount(1000)" class="amount-btn" style="background: rgba(255,255,255,0.1); border: none; color: white; padding: 14px; border-radius: 12px;">1000 ₽</button>
+            </div>
+            <input type="number" id="customAmount" placeholder="Своя сумма" style="width: 100%; background: rgba(255,255,255,0.1); border: none; color: white; padding: 14px; border-radius: 12px; margin-bottom: 20px; font-size: 16px;">
+            <button onclick="processPayment()" class="btn-primary" style="width: 100%; margin-bottom: 12px;">Оплатить</button>
+            <button onclick="hideTopUpModal()" style="width: 100%; background: none; border: none; color: #999; padding: 12px;">Отмена</button>
+        </div>
     </div>
 
-    <div id="topUpModal" class="fixed inset-0 z-50 hidden-element hidden flex items-center justify-center p-6">
-        <!-- содержимое модального окна (оптимизировано, но сохранено для краткости) -->
+    <div id="transferModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 1000;">
+        <!-- Содержимое модалки передачи - можно оставить как есть или упростить аналогично -->
     </div>
 
-    <!-- Асинхронная загрузка Tailwind -->
     <script>
-        // Загружаем Tailwind асинхронно
-        setTimeout(() => {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4';
-            script.async = true;
-            document.body.appendChild(script);
-        }, 100);
-    </script>
-
-    <!-- Оптимизированный JavaScript -->
-    <script>
-        // Функция debounce для оптимизации обработчиков событий
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // Функция throttle для оптимизации обработчиков событий
-        function throttle(func, limit) {
-            let inThrottle;
-            return function(...args) {
-                if (!inThrottle) {
-                    func.apply(this, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
-                }
-            };
-        }
-
-        // Мемоизация DOM-элементов
-        const domCache = {
-            userAvatar: null,
-            userName: null,
-            balance: null,
-            loginModal: null,
-            topUpModal: null,
-            transferModal: null
+        // Упрощенный JavaScript с оптимизациями для Android
+        let selectedAmount = 0;
+        
+        // Кэширование DOM элементов
+        const elements = {
+            loginModal: document.getElementById('loginModal'),
+            topUpModal: document.getElementById('topUpModal'),
+            transferModal: document.getElementById('transferModal'),
+            userName: document.getElementById('userName'),
+            balance: document.getElementById('balance')
         };
 
-        function getElement(id) {
-            if (!domCache[id]) {
-                domCache[id] = document.getElementById(id);
-            }
-            return domCache[id];
-        }
-
-        // Оптимизированная инициализация
+        // Инициализация Telegram WebApp
         function initApp() {
             try {
                 const tg = window.Telegram?.WebApp;
@@ -408,148 +370,60 @@
                     tg.expand();
                     
                     if (tg.initDataUnsafe?.user) {
-                        updateUserUI(tg.initDataUnsafe.user);
+                        const user = tg.initDataUnsafe.user;
+                        elements.userName.textContent = user.first_name + (user.last_name ? ' ' + user.last_name : '');
                     }
-                    
-                    // Оптимизированный обработчик BackButton
-                    tg.BackButton.onClick(() => {
-                        if (!getElement('loginModal')?.classList.contains('hidden')) {
-                            hideLoginModal();
-                        } else if (!getElement('topUpModal')?.classList.contains('hidden')) {
-                            hideTopUpModal();
-                        } else if (!getElement('transferModal')?.classList.contains('hidden')) {
-                            hideTransferModal();
-                        } else {
-                            tg.BackButton.hide();
-                        }
-                    });
                 }
-                
-                // Делаем функции глобальными для onclick
-                window.showLoginModal = showLoginModal;
-                window.hideLoginModal = hideLoginModal;
-                window.showTopUpModal = showTopUpModal;
-                window.hideTopUpModal = hideTopUpModal;
-                window.showTransferModal = showTransferModal;
-                window.hideTransferModal = hideTransferModal;
-                window.selectAmount = selectAmount;
-                window.processPayment = processPayment;
-                
-                // Оптимизированное создание частиц
-                requestAnimationFrame(() => {
-                    createParticles();
-                    createSubtleConfetti();
-                });
-                
             } catch (e) {
                 console.log('Init error:', e);
             }
         }
 
-        function updateUserUI(user) {
-            const avatar = getElement('userAvatar');
-            const name = getElement('userName');
-            
-            if (user) {
-                const fullName = user.first_name + (user.last_name ? ' ' + user.last_name : '');
-                name.textContent = fullName;
-                
-                if (user.photo_url) {
-                    const img = document.createElement('img');
-                    img.src = user.photo_url;
-                    img.className = 'w-full h-full object-cover rounded-full';
-                    img.alt = 'avatar';
-                    img.loading = 'lazy';
-                    img.onerror = () => {
-                        avatar.innerHTML = user.first_name.charAt(0).toUpperCase();
-                    };
-                    avatar.innerHTML = '';
-                    avatar.appendChild(img);
-                } else {
-                    avatar.textContent = user.first_name.charAt(0).toUpperCase();
-                }
-            }
-        }
-
-        // Функции модальных окон
+        // Оптимизированные функции модальных окон
         function showLoginModal() {
-            const modal = getElement('loginModal');
-            modal.classList.remove('hidden');
-            modal.classList.remove('hidden-element');
-            document.body.classList.add('modal-open');
-            
-            const tg = window.Telegram?.WebApp;
-            if (tg) tg.BackButton.show();
+            elements.loginModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         function hideLoginModal() {
-            const modal = getElement('loginModal');
-            modal.classList.add('hidden');
-            modal.classList.add('hidden-element');
-            document.body.classList.remove('modal-open');
-            
-            const tg = window.Telegram?.WebApp;
-            if (tg) tg.BackButton.hide();
+            elements.loginModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         function showTopUpModal() {
-            const modal = getElement('topUpModal');
-            modal.classList.remove('hidden');
-            modal.classList.remove('hidden-element');
-            document.body.classList.add('modal-open');
-            
-            const tg = window.Telegram?.WebApp;
-            if (tg) tg.BackButton.show();
+            elements.topUpModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         function hideTopUpModal() {
-            const modal = getElement('topUpModal');
-            modal.classList.add('hidden');
-            modal.classList.add('hidden-element');
-            document.body.classList.remove('modal-open');
-            
-            const tg = window.Telegram?.WebApp;
-            if (tg) tg.BackButton.hide();
+            elements.topUpModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         function showTransferModal() {
-            const modal = getElement('transferModal');
-            modal.classList.remove('hidden');
-            modal.classList.remove('hidden-element');
-            document.body.classList.add('modal-open');
-            
-            const tg = window.Telegram?.WebApp;
-            if (tg) tg.BackButton.show();
+            elements.transferModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         function hideTransferModal() {
-            const modal = getElement('transferModal');
-            modal.classList.add('hidden');
-            modal.classList.add('hidden-element');
-            document.body.classList.remove('modal-open');
-            
-            const tg = window.Telegram?.WebApp;
-            if (tg) tg.BackButton.hide();
+            elements.transferModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
-        let selectedAmount = 0;
-        function selectAmount(amount, event) {
+        // Оптимизированный выбор суммы
+        function selectAmount(amount) {
             selectedAmount = amount;
-            const customAmount = getElement('customAmount');
-            if (customAmount) customAmount.value = amount;
+            document.getElementById('customAmount').value = amount;
             
             document.querySelectorAll('.amount-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600/30', 'border', 'border-indigo-500');
+                btn.style.background = 'rgba(255,255,255,0.1)';
             });
-            
-            if (event?.target) {
-                event.target.classList.add('bg-indigo-600/30', 'border', 'border-indigo-500');
-            }
+            event.target.style.background = '#6366f1';
         }
 
         function processPayment() {
-            const customAmount = getElement('customAmount');
-            const amount = customAmount?.value ? parseFloat(customAmount.value) : selectedAmount;
+            const customAmount = document.getElementById('customAmount').value;
+            const amount = customAmount ? parseFloat(customAmount) : selectedAmount;
             
             if (amount > 0) {
                 hideTopUpModal();
@@ -557,71 +431,19 @@
             }
         }
 
-        // Оптимизированные анимации
-        function createParticles() {
-            const container = getElement('particles');
-            if (!container) return;
-            
-            const fragment = document.createDocumentFragment();
-            const count = Math.min(10, window.innerWidth > 768 ? 15 : 8);
-            
-            for (let i = 0; i < count; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle gpu-accelerated';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (20 + Math.random() * 15) + 's';
-                particle.style.width = (4 + Math.random() * 4) + 'px';
-                particle.style.height = particle.style.width;
-                fragment.appendChild(particle);
-            }
-            container.appendChild(fragment);
-        }
-
-        function createSubtleConfetti() {
-            const container = getElement('confetti');
-            if (!container) return;
-            
-            const fragment = document.createDocumentFragment();
-            const colors = ['rgba(99, 102, 241, 0.2)', 'rgba(139, 92, 246, 0.15)'];
-            const count = Math.min(10, window.innerWidth > 768 ? 15 : 8);
-            
-            for (let i = 0; i < count; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti gpu-accelerated';
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.animationDelay = Math.random() * 8 + 's';
-                confetti.style.animationDuration = (8 + Math.random() * 4) + 's';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.width = (3 + Math.random() * 3) + 'px';
-                confetti.style.height = (3 + Math.random() * 3) + 'px';
-                fragment.appendChild(confetti);
-            }
-            container.appendChild(fragment);
-        }
-
-        // Оптимизированный обработчик resize
-        window.addEventListener('resize', throttle(() => {
-            // Пересоздаем частицы при значительном изменении размера
-            if (Math.abs(window.innerWidth - lastWidth) > 100) {
-                getElement('particles').innerHTML = '';
-                createParticles();
-                lastWidth = window.innerWidth;
-            }
-        }, 200));
-
-        let lastWidth = window.innerWidth;
-
-        // Оптимизированный обработчик для клавиатуры
-        document.addEventListener('focusin', (e) => {
-            if (e.target.matches('input, textarea')) {
-                setTimeout(() => {
-                    e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 300);
+        // Закрытие по ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                hideLoginModal();
+                hideTopUpModal();
+                hideTransferModal();
             }
         });
 
-        // Инициализация после загрузки DOM
+        // Оптимизация touch событий
+        document.addEventListener('touchstart', () => {}, { passive: true });
+
+        // Запуск
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initApp);
         } else {
